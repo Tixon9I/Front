@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Особистий кабінет | FitnessOnlineClub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Базові стилі та змінні */
+        :root {
+            --primary-color: #2D5F9A;
+            --primary-dark: #234b7c;
+            --secondary-color: #4A4A4A;
+            --accent-color: #E8F1FA;
+            --text-color: #333;
+            --text-light: #666;
+            --text-dark: #222;
+            --background-light: #f8f9fa;
+            --white: #fff;
+            --border-color: #e6e6e6;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+        }
+
+        body {
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: var(--background-light);
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 0;
+        }
+
+        /* Хедер */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 0.8rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            color: var(--text-dark);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .user-info:hover {
+            background-color: var(--accent-color);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 0.8rem;
+        }
+
+        .user-name {
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .dropdown-toggle {
+            margin-left: 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        /* Головний контент */
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        /* Бічне меню */
+        .sidebar {
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            height: fit-content;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-menu-link {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 1rem;
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .sidebar-menu-link:hover {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+        }
+
+        .sidebar-menu-link.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .sidebar-menu-link i {
+            margin-right: 0.8rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .sidebar-menu-divider {
+            height: 1px;
+            background-color: var(--border-color);
+            margin: 1rem 0;
+        }
+
+        /* Основний контент */
+        .main-content {
+            display: grid;
+            grid-template-rows: auto 1fr;
+            gap: 1.5rem;
+        }
+
+        .page-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-card-title {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card-value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card-info {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-top: auto;
+        }
+
+        .dashboard-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .content-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .content-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.2rem;
+        }
+
+        .content-card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .content-card-action {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .content-card-action:hover {
+            text-decoration: underline;
+        }
+
+        /* Стилі для абонементів */
+        .subscription-info {
+            padding: 1rem 0;
+        }
+
+        .current-subscription {
+            margin-bottom: 1.5rem;
+        }
+
+        .subscription-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .subscription-status {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .subscription-status.active {
+            background-color: rgba(40, 167, 69, 0.15);
+            color: var(--success-color);
+        }
+
+        .subscription-status.expired {
+            background-color: rgba(220, 53, 69, 0.15);
+            color: var(--danger-color);
+        }
+
+        .subscription-validity, 
+        .subscription-remains {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .subscription-progress {
+            height: 8px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: var(--primary-color);
+            border-radius: 4px;
+        }
+
+        .subscription-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .book-workout-button, 
+        .renew-subscription-button {
+            padding: 0.7rem 1rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .book-workout-button {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .book-workout-button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .renew-subscription-button {
+            background-color: var(--white);
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+
+        .renew-subscription-button:hover {
+            background-color: var(--accent-color);
+        }
+
+        .book-workout-button i, 
+        .renew-subscription-button i {
+            margin-right: 0.5rem;
+        }
+
+        /* На малих екранах кнопки абонемента будуть на всю ширину */
+        @media (max-width: 576px) {
+            .subscription-actions {
+                flex-direction: column;
+            }
+            
+            .book-workout-button, 
+            .renew-subscription-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Список тренувань */
+        .workouts-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .workout-item {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .workout-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .workout-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            margin-right: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .workout-info {
+            flex: 1;
+        }
+
+        .workout-title {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.2rem;
+        }
+
+        .workout-meta {
+            display: flex;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            gap: 1rem;
+        }
+
+        .workout-action {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .workout-action i {
+            margin-left: 0.5rem;
+        }
+
+        /* Найближчі тренування */
+        .upcoming-workouts {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .upcoming-workout {
+            display: flex;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .upcoming-workout:last-child {
+            border-bottom: none;
+        }
+
+        .workout-date {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            margin-right: 1rem;
+        }
+
+        .date-day {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .date-month {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .upcoming-workout-info {
+            flex: 1;
+        }
+
+        .upcoming-workout-title {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.2rem;
+        }
+
+        .upcoming-workout-time {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .upcoming-workout-trainer {
+            font-size: 0.85rem;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+        }
+
+        .trainer-avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+
+        /* Прогрес */
+        .progress-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .progress-card {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .progress-card-title {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-card-value {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-card-change {
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .progress-card-change.positive {
+            color: var(--success-color);
+        }
+
+        .progress-card-change.negative {
+            color: var(--danger-color);
+        }
+
+        .progress-card-change i {
+            margin-right: 0.3rem;
+        }
+
+        /* Новий блок: Зворотній зв'язок та оцінка тренерів */
+        .feedback-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .feedback-item {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+
+        .feedback-trainer {
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+
+        .feedback-trainer-name {
+            font-weight: 600;
+            margin-left: 0.8rem;
+        }
+
+        .feedback-workout-type {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-left: 1rem;
+        }
+
+        .feedback-date {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .feedback-rating {
+            display: flex;
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        .star {
+            color: var(--warning-color);
+            margin-right: 0.2rem;
+        }
+
+        .star.empty {
+            color: #ddd;
+        }
+
+        .feedback-text {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .add-feedback {
+            margin-top: 1.5rem;
+        }
+
+        .add-feedback-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 0.7rem 1rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+
+        .add-feedback-button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .add-feedback-button i {
+            margin-right: 0.5rem;
+        }
+
+        /* Адаптивність */
+        @media (max-width: 992px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .dashboard-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .dashboard-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .user-name {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo"><span>Fitness</span>OnlineClub</a>
+            <div class="user-menu">
+                <div class="user-info" id="userInfoDisplay">
+                    <div class="user-avatar">ОК</div>
+                    <div class="user-name">Олександр Ковальчук</div>
+                    <i class="fas fa-chevron-down dropdown-toggle"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="dashboard-container">
+            <!-- Бічне меню -->
+            <div class="sidebar">
+                <ul class="sidebar-menu">
+                    <li class="sidebar-menu-item">
+                        <a href="#" class="sidebar-menu-link active">
+                            <i class="fas fa-home"></i>
+                            Головна
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="#" class="sidebar-menu-link">
+                            <i class="fas fa-dumbbell"></i>
+                            Мої тренування
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="#" class="sidebar-menu-link">
+                            <i class="fas fa-calendar-alt"></i>
+                            Розклад
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="#" class="sidebar-menu-link">
+                            <i class="fas fa-user-friends"></i>
+                            Тренери
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="#" class="sidebar-menu-link">
+                            <i class="fas fa-chart-line"></i>
+                            Мій прогрес
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="#" class="sidebar-menu-link">
+                            <i class="fas fa-heartbeat"></i>
+                            Здоров'я
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="#" class="sidebar-menu-link">
+                            <i class="fas fa-star"></i>
+                            Відгуки та оцінки
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                      <a href="#" class="sidebar-menu-link">
+                          <i class="fas fa-credit-card"></i>
+                          Абонементи
+                      </a>
+                  </li>
+                    <div class="sidebar-menu-divider"></div>
+                    <li class="sidebar-menu-item">
+                        <a href="#" class="sidebar-menu-link">
+                            <i class="fas fa-cog"></i>
+                            Налаштування
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="index.html" class="sidebar-menu-link">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Вийти
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Основний контент -->
+            <div class="main-content">
+                <div>
+                    <h1 class="page-title">Мій кабінет</h1>
+                    
+                    <!-- Статистика -->
+                    <div class="dashboard-stats">
+                        <div class="stat-card">
+                            <div class="stat-card-title">Тренувань цього місяця</div>
+                            <div class="stat-card-value">12</div>
+                            <div class="stat-card-info">5 заплановано</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card-title">Втрата ваги</div>
+                            <div class="stat-card-value">2.5 кг</div>
+                            <div class="stat-card-info">За останній місяць</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card-title">Спалено калорій</div>
+                            <div class="stat-card-value">13,452</div>
+                            <div class="stat-card-info">За останній місяць</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card-title">Регулярність</div>
+                            <div class="stat-card-value">85%</div>
+                            <div class="stat-card-info">+7% за місяць</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-content">
+                    <!-- Лівий блок -->
+                    <div>
+                        <!-- Останні тренування -->
+                        <div class="content-card">
+                            <div class="content-card-header">
+                                <h2 class="content-card-title">Мої останні тренування</h2>
+                                <a href="#" class="content-card-action">Переглянути всі</a>
+                            </div>
+                            <div class="workouts-list">
+                                <div class="workout-item">
+                                    <div class="workout-icon">
+                                        <i class="fas fa-running"></i>
+                                    </div>
+                                    <div class="workout-info">
+                                        <div class="workout-title">Кардіо тренування</div>
+                                        <div class="workout-meta">
+                                            <span>25 лютого</span>
+                                            <span>45 хв</span>
+                                            <span>350 ккал</span>
+                                        </div>
+                                    </div>
+                                    <a href="#" class="workout-action">
+                                        Деталі <i class="fas fa-chevron-right"></i>
+                                    </a>
+                                </div>
+                                <div class="workout-item">
+                                    <div class="workout-icon">
+                                        <i class="fas fa-dumbbell"></i>
+                                    </div>
+                                    <div class="workout-info">
+                                        <div class="workout-title">Силове тренування</div>
+                                        <div class="workout-meta">
+                                            <span>23 лютого</span>
+                                            <span>60 хв</span>
+                                            <span>420 ккал</span>
+                                        </div>
+                                    </div>
+                                    <a href="#" class="workout-action">
+                                        Деталі <i class="fas fa-chevron-right"></i>
+                                    </a>
+                                </div>
+                                <div class="workout-item">
+                                    <div class="workout-icon">
+                                        <i class="fas fa-yin-yang"></i>
+                                    </div>
+                                    <div class="workout-info">
+                                        <div class="workout-title">Йога</div>
+                                        <div class="workout-meta">
+                                            <span>21 лютого</span>
+                                            <span>30 хв</span>
+                                            <span>200 ккал</span>
+                                        </div>
+                                    </div>
+                                    <a href="#" class="workout-action">
+                                        Деталі <i class="fas fa-chevron-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Прогрес -->
+                        <div class="content-card">
+                            <div class="content-card-header">
+                                <h2 class="content-card-title">Мій прогрес</h2>
+                                <a href="#" class="content-card-action">Повний звіт</a>
+                            </div>
+                            <div class="progress-cards">
+                                <div class="progress-card">
+                                    <div class="progress-card-title">Вага</div>
+                                    <div class="progress-card-value">75 кг</div>
+                                    <div class="progress-card-change positive">
+                                        <i class="fas fa-arrow-down"></i> 2.5 кг
+                                    </div>
+                                </div>
+                                <div class="progress-card">
+                                    <div class="progress-card-title">Жир</div>
+                                    <div class="progress-card-value">18%</div>
+                                    <div class="progress-card-change positive">
+                                        <i class="fas fa-arrow-down"></i> 2.1%
+                                    </div>
+                                </div>
+                                <div class="progress-card">
+                                    <div class="progress-card-title">М'язи</div>
+                                    <div class="progress-card-value">32%</div>
+                                    <div class="progress-card-change positive">
+                                        <i class="fas fa-arrow-up"></i> 1.5%
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- НОВИЙ БЛОК: Зворотній зв'язок та оцінка тренерів -->
+                        <div class="content-card">
+                            <div class="content-card-header">
+                                <h2 class="content-card-title">Мої відгуки та оцінки</h2>
+                                <a href="#" class="content-card-action">Переглянути всі</a>
+                            </div>
+                            <div class="feedback-list">
+                                <div class="feedback-item">
+                                    <div class="feedback-header">
+                                        <div class="feedback-trainer">
+                                            <div class="trainer-avatar">МТ</div>
+                                            <div class="feedback-trainer-name">Михайло Тренер</div>
+                                            <div class="feedback-workout-type">Силове тренування</div>
+                                        </div>
+                                        <div class="feedback-date">23 лютого</div>
+                                    </div>
+                                    <div class="feedback-rating">
+                                        <i class="fas fa-star star"></i>
+                                        <i class="fas fa-star star"></i>
+                                        <i class="fas fa-star star"></i>
+                                        <i class="fas fa-star star"></i>
+                                        <i class="fas fa-star star"></i>
+                                    </div>
+                                    <div class="feedback-text">
+                                        Відмінне тренування! Михайло дуже уважний до техніки і добре пояснює всі вправи. Вже відчуваю прогрес.
+                                    </div>
+                                </div>
+                                <div class="feedback-item">
+                                    <div class="feedback-header">
+                                        <div class="feedback-trainer">
+                                            <div class="trainer-avatar">ІЙ</div>
+                                            <div class="feedback-trainer-name">Ірина Йога</div>
+                                            <div class="feedback-workout-type">Йога</div>
+                                        </div>
+                                        <div class="feedback-date">21 лютого</div>
+                                    </div>
+                                    <div class="feedback-rating">
+                                        <i class="fas fa-star star"></i>
+                                        <i class="fas fa-star star"></i>
+                                        <i class="fas fa-star star"></i>
+                                        <i class="fas fa-star star"></i>
+                                        <i class="fas fa-star star empty"></i>
+                                    </div>
+                                    <div class="feedback-text">
+                                        Гарне заняття для початківців. Ірина приємна і уважна, хоча для мого рівня деякі пози були занадто прості.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="add-feedback">
+                                <button class="add-feedback-button">
+                                    <i class="fas fa-plus"></i> Додати відгук
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Правий блок -->
+                    <div>
+                        <!-- Найближчі тренування -->
+                        <div class="content-card">
+                            <div class="content-card-header">
+                                <h2 class="content-card-title">Найближчі тренування</h2>
+                                <a href="#" class="content-card-action">Календар</a>
+                            </div>
+                            <div class="upcoming-workouts">
+                                <div class="upcoming-workout">
+                                    <div class="workout-date">
+                                        <div class="date-day">27</div>
+                                        <div class="date-month">лют</div>
+                                    </div>
+                                    <div class="upcoming-workout-info">
+                                        <div class="upcoming-workout-title">Силове тренування</div>
+                                        <div class="upcoming-workout-time">
+                                            <i class="far fa-clock"></i> 18:00 - 19:00
+                                        </div>
+                                        <div class="upcoming-workout-trainer">
+                                            <div class="trainer-avatar">MT</div>
+                                            <span>Михайло Тренер</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="upcoming-workout">
+                                    <div class="workout-date">
+                                        <div class="date-day">28</div>
+                                        <div class="date-month">лют</div>
+                                    </div>
+                                    <div class="upcoming-workout-info">
+                                        <div class="upcoming-workout-title">Кардіо</div>
+                                        <div class="upcoming-workout-time">
+                                            <i class="far fa-clock"></i> 10:00 - 10:45
+                                        </div>
+                                        <div class="upcoming-workout-trainer">
+                                            <div class="trainer-avatar">ОК</div>
+                                            <span>Олена Кардіо</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="upcoming-workout">
+                                    <div class="workout-date">
+                                        <div class="date-day">02</div>
+                                        <div class="date-month">бер</div>
+                                    </div>
+                                    <div class="upcoming-workout-info">
+                                        <div class="upcoming-workout-title">Йога</div>
+                                        <div class="upcoming-workout-time">
+                                            <i class="far fa-clock"></i> 9:00 - 10:00
+                                        </div>
+                                        <div class="upcoming-workout-trainer">
+                                            <div class="trainer-avatar">ІЙ</div>
+                                            <span>Ірина Йога</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Поради -->
+                        <div class="content-card">
+                            <div class="content-card-header">
+                                <h2 class="content-card-title">Персональні поради</h2>
+                            </div>
+                            <p>Враховуючи ваш план тренувань, рекомендуємо збільшити споживання білка до 1.5г на кг ваги для кращого відновлення м'язів.</p>
+                            <p style="margin-top: 0.8rem;">Спробуйте додати більше стретчингу після тренувань, щоб покращити гнучкість і знизити ризик травм.</p>
+                        </div>
+
+                        <!-- Абонементи та оплата -->
+                        <div class="content-card">
+                          <div class="content-card-header">
+                              <h2 class="content-card-title">Мій абонемент</h2>
+                              <a href="#" class="content-card-action">Всі абонементи</a>
+                          </div>
+                          <div class="subscription-info">
+                              <div class="current-subscription">
+                                  <div class="subscription-name">Базовий</div>
+                                  <div class="subscription-status active">Активний</div>
+                                  <div class="subscription-validity">Дійсний до: 27 березня 2025</div>
+                                  <div class="subscription-remains">Залишилось тренувань: 8 з 12</div>
+                                  <div class="subscription-progress">
+                                      <div class="progress-bar" style="width: 33%"></div>
+                                  </div>
+                              </div>
+                              <div class="subscription-actions">
+                                  <button class="book-workout-button">
+                                      <i class="fas fa-calendar-plus"></i> Забронювати тренування
+                                  </button>
+                                  <button class="renew-subscription-button">
+                                      <i class="fas fa-sync-alt"></i> Продовжити абонемент
+                                  </button>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

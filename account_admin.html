@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Панель адміністратора | FitnessOnlineClub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Базові стилі та змінні */
+        :root {
+            --primary-color: #2D5F9A;
+            --primary-dark: #234b7c;
+            --secondary-color: #4A4A4A;
+            --accent-color: #E8F1FA;
+            --text-color: #333;
+            --text-light: #666;
+            --text-dark: #222;
+            --background-light: #f8f9fa;
+            --white: #fff;
+            --border-color: #e6e6e6;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+        }
+
+        body {
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: var(--background-light);
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 0;
+        }
+
+        /* Хедер */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 0.8rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            color: var(--text-dark);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .user-info:hover {
+            background-color: var(--accent-color);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 0.8rem;
+        }
+
+        .user-name {
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .dropdown-toggle {
+            margin-left: 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        /* Головний контент */
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        /* Бічне меню */
+        .sidebar {
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            height: fit-content;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-menu-link {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 1rem;
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .sidebar-menu-link:hover {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+        }
+
+        .sidebar-menu-link.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .sidebar-menu-link i {
+            margin-right: 0.8rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .sidebar-menu-divider {
+            height: 1px;
+            background-color: var(--border-color);
+            margin: 1rem 0;
+        }
+
+        /* Основний контент */
+        .main-content {
+            display: grid;
+            grid-template-rows: auto 1fr;
+            gap: 1.5rem;
+        }
+
+        .page-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-card-title {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card-value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card-info {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-top: auto;
+        }
+
+        .dashboard-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .content-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .content-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.2rem;
+        }
+
+        .content-card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .content-card-action {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .content-card-action:hover {
+            text-decoration: underline;
+        }
+
+        /* Управління записами на тренування */
+        .workouts-management {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .workouts-management th, 
+        .workouts-management td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .workouts-management th {
+            font-weight: 600;
+            color: var(--text-dark);
+            background-color: var(--accent-color);
+        }
+
+        .workouts-management tr:hover {
+            background-color: var(--background-light);
+        }
+
+        .client-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+
+        .client-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .client-name {
+            font-weight: 500;
+        }
+
+        .workout-status {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .workout-status.confirmed {
+            background-color: rgba(40, 167, 69, 0.15);
+            color: var(--success-color);
+        }
+
+        .workout-status.pending {
+            background-color: rgba(255, 193, 7, 0.15);
+            color: var(--warning-color);
+        }
+
+        .workout-status.canceled {
+            background-color: rgba(220, 53, 69, 0.15);
+            color: var(--danger-color);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-button {
+            padding: 0.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .edit-button {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .edit-button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .delete-button {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        .delete-button:hover {
+            background-color: #bd2130;
+        }
+
+        /* Фільтри та пошук */
+        .filters-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            align-items: center;
+        }
+
+        .filter-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .filter-select, 
+        .search-input {
+            padding: 0.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        .search-input {
+            flex-grow: 1;
+            min-width: 200px;
+        }
+
+        .filter-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+
+        .filter-button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .add-workout-button {
+            margin-left: auto;
+            background-color: var(--success-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+
+        .add-workout-button:hover {
+            background-color: #218838;
+        }
+
+        .add-workout-button i {
+            margin-right: 0.5rem;
+        }
+
+        /* Управління користувачами */
+        .users-management {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .users-management th, 
+        .users-management td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .users-management th {
+            font-weight: 600;
+            color: var(--text-dark);
+            background-color: var(--accent-color);
+        }
+
+        .users-management tr:hover {
+            background-color: var(--background-light);
+        }
+
+        .user-status {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .user-status.active {
+            background-color: rgba(40, 167, 69, 0.15);
+            color: var(--success-color);
+        }
+
+        .user-status.inactive {
+            background-color: rgba(220, 53, 69, 0.15);
+            color: var(--danger-color);
+        }
+
+        /* Пагінація */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .pagination-item {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .pagination-item:hover {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+        }
+
+        .pagination-item.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* Модальне вікно */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            margin: 10% auto;
+            padding: 1.5rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .modal-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .close-button {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-light);
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input, 
+        .form-select, 
+        .form-textarea {
+            width: 100%;
+            padding: 0.7rem;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .cancel-button {
+            padding: 0.7rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background-color: var(--white);
+            color: var(--text-color);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .cancel-button:hover {
+            background-color: var(--background-light);
+        }
+
+        .save-button {
+            padding: 0.7rem 1rem;
+            border: none;
+            border-radius: 5px;
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .save-button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* Адаптивність */
+        @media (max-width: 992px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .workouts-management, 
+            .users-management {
+                font-size: 0.9rem;
+            }
+
+            .workouts-management th:nth-child(4), 
+            .workouts-management td:nth-child(4),
+            .users-management th:nth-child(4), 
+            .users-management td:nth-child(4) {
+                display: none;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .dashboard-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .user-name {
+                display: none;
+            }
+
+            .workouts-management th:nth-child(3), 
+            .workouts-management td:nth-child(3),
+            .users-management th:nth-child(3), 
+            .users-management td:nth-child(3) {
+                display: none;
+            }
+
+            .filters-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filter-item {
+                width: 100%;
+            }
+
+            .add-workout-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Хедер -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo"><span>Fitness</span>OnlineClub</a>
+            <div class="user-menu">
+                <div class="user-info">
+                    <div class="user-avatar">A</div>
+                    <div class="user-name">Адміністратор</div>
+                    <i class="fas fa-chevron-down dropdown-toggle"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основний контент -->
+    <div class="container dashboard-container">
+        <!-- Бічне меню -->
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li class="sidebar-menu-item">
+                    <a href="#" class="sidebar-menu-link active">
+                        <i class="fas fa-tachometer-alt"></i>
+                        Головна
+                    </a>
+                </li>
+                <li class="sidebar-menu-item">
+                    <a href="#" class="sidebar-menu-link">
+                        <i class="fas fa-dumbbell"></i>
+                        Управління тренуваннями
+                    </a>
+                </li>
+                <li class="sidebar-menu-item">
+                    <a href="#" class="sidebar-menu-link">
+                        <i class="fas fa-users"></i>
+                        Управління користувачами
+                    </a>
+                </li>
+                <li class="sidebar-menu-item">
+                    <a href="#" class="sidebar-menu-link">
+                        <i class="fas fa-calendar-alt"></i>
+                        Розклад
+                    </a>
+                </li>
+                <li class="sidebar-menu-item">
+                    <a href="#" class="sidebar-menu-link">
+                        <i class="fas fa-chart-bar"></i>
+                        Статистика
+                    </a>
+                </li>
+                <div class="sidebar-menu-divider"></div>
+                <li class="sidebar-menu-item">
+                    <a href="#" class="sidebar-menu-link">
+                        <i class="fas fa-cog"></i>
+                        Налаштування
+                    </a>
+                </li>
+                <li class="sidebar-menu-item">
+                    <a href="#" class="sidebar-menu-link">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Вийти
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Головний контент -->
+        <div class="main-content">
+            <div>
+                <h1 class="page-title">Панель адміністратора</h1>
+                
+                <!-- Статистика -->
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <span class="stat-card-title">Активних користувачів</span>
+                        <div class="stat-card-value">124</div>
+                        <span class="stat-card-info">+8 за останній тиждень</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-card-title">Записів на тренування</span>
+                        <div class="stat-card-value">47</div>
+                        <span class="stat-card-info">на наступний тиждень</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-card-title">Активних абонементів</span>
+                        <div class="stat-card-value">98</div>
+                        <span class="stat-card-info">85% від усіх користувачів</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-card-title">Тренувань сьогодні</span>
+                        <div class="stat-card-value">12</div>
+                        <span class="stat-card-info">+3 у порівнянні з минулим тижнем</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-content">
+                <!-- Управління записами на тренування -->
+                <div class="content-card">
+                    <div class="content-card-header">
+                        <h2 class="content-card-title">Управління записами на тренування</h2>
+                        <a href="#" class="content-card-action">Історія записів</a>
+                    </div>
+                    
+                    <!-- Фільтри та пошук -->
+                    <div class="filters-container">
+                        <div class="filter-item">
+                            <label class="filter-label">Тренування:</label>
+                            <select class="filter-select">
+                                <option value="all">Всі типи</option>
+                                <option value="yoga">Йога</option>
+                                <option value="fitness">Фітнес</option>
+                                <option value="pilates">Пілатес</option>
+                                <option value="crossfit">Кросфіт</option>
+                            </select>
+                        </div>
+                        <div class="filter-item">
+                            <label class="filter-label">Дата:</label>
+                            <select class="filter-select">
+                                <option value="all">Всі дати</option>
+                                <option value="today">Сьогодні</option>
+                                <option value="tomorrow">Завтра</option>
+                                <option value="week">Цей тиждень</option>
+                                <option value="month">Цей місяць</option>
+                            </select>
+                        </div>
+                        <div class="filter-item">
+                            <label class="filter-label">Статус:</label>
+                            <select class="filter-select">
+                                <option value="all">Всі статуси</option>
+                                <option value="confirmed">Підтверджені</option>
+                                <option value="pending">Очікують</option>
+                                <option value="canceled">Скасовані</option>
+                            </select>
+                        </div>
+                        <input type="text" class="search-input" placeholder="Пошук клієнта...">
+                        <button class="filter-button">Застосувати</button>
+                        <button class="add-workout-button"><i class="fas fa-plus"></i> Додати запис</button>
+                    </div>
+                    
+                    <!-- Таблиця записів на тренування -->
+                    <table class="workouts-management">
+                        <thead>
+                            <tr>
+                                <th>Клієнт</th>
+                                <th>Тренування</th>
+                                <th>Дата і час</th>
+                                <th>Тренер</th>
+                                <th>Статус</th>
+                                <th>Дії</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="client-info">
+                                        <div class="client-avatar">ОК</div>
+                                        <span class="client-name">Олексій Ковальчук</span>
+                                    </div>
+                                </td>
+                                <td>Кросфіт</td>
+                                <td>27.02.2025, 10:00</td>
+                                <td>Марина Петренко</td>
+                                <td><span class="workout-status confirmed">Підтверджено</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="action-button edit-button"><i class="fas fa-edit"></i></button>
+                                        <button class="action-button delete-button"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="client-info">
+                                        <div class="client-avatar">ІВ</div>
+                                        <span class="client-name">Ірина Василенко</span>
+                                    </div>
+                                </td>
+                                <td>Йога</td>
+                                <td>27.02.2025, 12:30</td>
+                                <td>Андрій Сидоренко</td>
+                                <td><span class="workout-status pending">Очікує</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="action-button edit-button"><i class="fas fa-edit"></i></button>
+                                        <button class="action-button delete-button"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="client-info">
+                                        <div class="client-avatar">МР</div>
+                                        <span class="client-name">Максим Романенко</span>
+                                    </div>
+                                </td>
+                                <td>Пілатес</td>
+                                <td>27.02.2025, 15:00</td>
+                                <td>Наталія Кравчук</td>
+                                <td><span class="workout-status confirmed">Підтверджено</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="action-button edit-button"><i class="fas fa-edit"></i></button>
+                                        <button class="action-button delete-button"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="client-info">
+                                        <div class="client-avatar">ТД</div>
+                                        <span class="client-name">Тетяна Дмитренко</span>
+                                    </div>
+                                </td>
+                                <td>Кросфіт</td>
+                                <td>28.02.2025, 09:00</td>
+                                <td>Ігор Мельник</td>
+                                <td><span class="workout-status canceled">Скасовано</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="action-button edit-button"><i class="fas fa-edit"></i></button>
+                                        <button class="action-button delete-button"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                  <div class="client-info">
+                                      <div class="client-avatar">ОЛ</div>
+                                      <span class="client-name">Олег Лисенко</span>
+                                  </div>
+                              </td>
+                              <td>Фітнес</td>
+                              <td>28.02.2025, 11:30</td>
+                              <td>Катерина Іванова</td>
+                              <td><span class="workout-status confirmed">Підтверджено</span></td>
+                              <td>
+                                  <div class="action-buttons">
+                                      <button class="action-button edit-button"><i class="fas fa-edit"></i></button>
+                                      <button class="action-button delete-button"><i class="fas fa-trash"></i></button>
+                                  </div>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+                  
+                  <!-- Пагінація -->
+                  <div class="pagination">
+                      <div class="pagination-item"><i class="fas fa-chevron-left"></i></div>
+                      <div class="pagination-item active">1</div>
+                      <div class="pagination-item">2</div>
+                      <div class="pagination-item">3</div>
+                      <div class="pagination-item"><i class="fas fa-chevron-right"></i></div>
+                  </div>
+                </div>
+
+                <!-- Управління обліковими записами користувачів -->
+                <div class="content-card">
+                  <div class="content-card-header">
+                      <h2 class="content-card-title">Управління обліковими записами</h2>
+                      <a href="#" class="content-card-action">Експорт даних</a>
+                  </div>
+                  
+                  <!-- Фільтри та пошук -->
+                  <div class="filters-container">
+                      <div class="filter-item">
+                          <label class="filter-label">Роль:</label>
+                          <select class="filter-select">
+                              <option value="all">Всі ролі</option>
+                              <option value="client">Клієнти</option>
+                              <option value="trainer">Тренери</option>
+                              <option value="admin">Адміністратори</option>
+                          </select>
+                      </div>
+                      <div class="filter-item">
+                          <label class="filter-label">Статус:</label>
+                          <select class="filter-select">
+                              <option value="all">Всі статуси</option>
+                              <option value="active">Активні</option>
+                              <option value="inactive">Неактивні</option>
+                          </select>
+                      </div>
+                      <div class="filter-item">
+                          <label class="filter-label">Сортування:</label>
+                          <select class="filter-select">
+                              <option value="name">За ім'ям</option>
+                              <option value="date">За датою реєстрації</option>
+                              <option value="activity">За активністю</option>
+                          </select>
+                      </div>
+                      <input type="text" class="search-input" placeholder="Пошук користувача...">
+                      <button class="filter-button">Застосувати</button>
+                      <button class="add-workout-button"><i class="fas fa-plus"></i> Новий користувач</button>
+                  </div>
+                  
+                  <!-- Таблиця користувачів -->
+                  <table class="users-management">
+                      <thead>
+                          <tr>
+                              <th>Користувач</th>
+                              <th>Роль</th>
+                              <th>Email</th>
+                              <th>Дата реєстрації</th>
+                              <th>Статус</th>
+                              <th>Дії</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <td>
+                                  <div class="client-info">
+                                      <div class="client-avatar">ОК</div>
+                                      <span class="client-name">Олексій Ковальчук</span>
+                                  </div>
+                              </td>
+                              <td>Клієнт</td>
+                              <td>oleksiy.k@example.com</td>
+                              <td>12.01.2025</td>
+                              <td><span class="user-status active">Активний</span></td>
+                              <td>
+                                  <div class="action-buttons">
+                                      <button class="action-button edit-button" data-id="1"><i class="fas fa-edit"></i></button>
+                                      <button class="action-button delete-button" data-id="1"><i class="fas fa-trash"></i></button>
+                                  </div>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <div class="client-info">
+                                      <div class="client-avatar">МП</div>
+                                      <span class="client-name">Марина Петренко</span>
+                                  </div>
+                              </td>
+                              <td>Тренер</td>
+                              <td>maryna.p@example.com</td>
+                              <td>05.11.2024</td>
+                              <td><span class="user-status active">Активний</span></td>
+                              <td>
+                                  <div class="action-buttons">
+                                      <button class="action-button edit-button" data-id="2"><i class="fas fa-edit"></i></button>
+                                      <button class="action-button delete-button" data-id="2"><i class="fas fa-trash"></i></button>
+                                  </div>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <div class="client-info">
+                                      <div class="client-avatar">ІВ</div>
+                                      <span class="client-name">Ірина Василенко</span>
+                                  </div>
+                              </td>
+                              <td>Клієнт</td>
+                              <td>iryna.v@example.com</td>
+                              <td>18.01.2025</td>
+                              <td><span class="user-status active">Активний</span></td>
+                              <td>
+                                  <div class="action-buttons">
+                                      <button class="action-button edit-button" data-id="3"><i class="fas fa-edit"></i></button>
+                                      <button class="action-button delete-button" data-id="3"><i class="fas fa-trash"></i></button>
+                                  </div>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <div class="client-info">
+                                      <div class="client-avatar">АС</div>
+                                      <span class="client-name">Андрій Сидоренко</span>
+                                  </div>
+                              </td>
+                              <td>Тренер</td>
+                              <td>andriy.s@example.com</td>
+                              <td>03.12.2024</td>
+                              <td><span class="user-status active">Активний</span></td>
+                              <td>
+                                  <div class="action-buttons">
+                                      <button class="action-button edit-button" data-id="4"><i class="fas fa-edit"></i></button>
+                                      <button class="action-button delete-button" data-id="4"><i class="fas fa-trash"></i></button>
+                                  </div>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <div class="client-info">
+                                      <div class="client-avatar">ВК</div>
+                                      <span class="client-name">Віктор Ковалюк</span>
+                                  </div>
+                              </td>
+                              <td>Клієнт</td>
+                              <td>viktor.k@example.com</td>
+                              <td>25.12.2024</td>
+                              <td><span class="user-status inactive">Неактивний</span></td>
+                              <td>
+                                  <div class="action-buttons">
+                                      <button class="action-button edit-button" data-id="5"><i class="fas fa-edit"></i></button>
+                                      <button class="action-button delete-button" data-id="5"><i class="fas fa-trash"></i></button>
+                                  </div>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+                  
+                  <!-- Пагінація -->
+                  <div class="pagination">
+                      <div class="pagination-item"><i class="fas fa-chevron-left"></i></div>
+                      <div class="pagination-item active">1</div>
+                      <div class="pagination-item">2</div>
+                      <div class="pagination-item">3</div>
+                      <div class="pagination-item"><i class="fas fa-chevron-right"></i></div>
+                  </div>
+                </div>
+
+                <!-- Модальне вікно для додавання/редагування користувача -->
+                <div id="userModal" class="modal">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h3 class="modal-title">Додати користувача</h3>
+                          <button class="close-button user-close-button">&times;</button>
+                      </div>
+                      <div class="modal-body">
+                          <form id="userForm">
+                              <div class="form-group">
+                                  <label class="form-label">Ім'я та прізвище</label>
+                                  <input type="text" class="form-input" placeholder="Введіть ім'я та прізвище">
+                              </div>
+                              <div class="form-group">
+                                  <label class="form-label">Email</label>
+                                  <input type="email" class="form-input" placeholder="Введіть email">
+                              </div>
+                              <div class="form-group">
+                                  <label class="form-label">Телефон</label>
+                                  <input type="tel" class="form-input" placeholder="Введіть номер телефону">
+                              </div>
+                              <div class="form-group">
+                                  <label class="form-label">Роль</label>
+                                  <select class="form-select">
+                                      <option value="client">Клієнт</option>
+                                      <option value="trainer">Тренер</option>
+                                      <option value="admin">Адміністратор</option>
+                                  </select>
+                              </div>
+                              <div class="form-group">
+                                  <label class="form-label">Пароль</label>
+                                  <input type="password" class="form-input" placeholder="Введіть пароль">
+                              </div>
+                              <div class="form-group">
+                                  <label class="form-label">Підтвердження паролю</label>
+                                  <input type="password" class="form-input" placeholder="Підтвердіть пароль">
+                              </div>
+                              <div class="form-group">
+                                  <label class="form-label">Статус</label>
+                                  <select class="form-select">
+                                      <option value="active">Активний</option>
+                                      <option value="inactive">Неактивний</option>
+                                  </select>
+                              </div>
+                              <div class="form-group">
+                                  <label class="form-label">Додаткова інформація</label>
+                                  <textarea class="form-textarea" placeholder="Додаткова інформація про користувача"></textarea>
+                              </div>
+                          </form>
+                      </div>
+                      <div class="modal-footer">
+                          <button class="cancel-button user-cancel-button">Скасувати</button>
+                          <button class="save-button user-save-button">Зберегти</button>
+                      </div>
+                  </div>
+                </div>
+
+                <!-- Модальне вікно для підтвердження видалення -->
+                <div id="confirmDeleteModal" class="modal">
+                  <div class="modal-content" style="max-width: 400px;">
+                      <div class="modal-header">
+                          <h3 class="modal-title">Підтвердження видалення</h3>
+                          <button class="close-button confirm-close-button">&times;</button>
+                      </div>
+                      <div class="modal-body">
+                          <p>Ви дійсно хочете видалити цього користувача? Цю дію неможливо скасувати.</p>
+                          <input type="hidden" id="deleteUserId" value="">
+                      </div>
+                      <div class="modal-footer">
+                          <button class="cancel-button confirm-cancel-button">Скасувати</button>
+                          <button class="delete-button confirm-delete-button" style="background-color: var(--danger-color);">Видалити</button>
+                      </div>
+                  </div>
+                </div>
+              
+              <!-- Модальне вікно для додавання/редагування запису -->
+              <div id="workoutModal" class="modal">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h3 class="modal-title">Додати запис на тренування</h3>
+                          <button class="close-button">&times;</button>
+                      </div>
+                      <div class="modal-body">
+                          <form id="workoutForm">
+                              <div class="form-group">
+                                  <label class="form-label">Клієнт</label>
+                                  <select class="form-select">
+                                      <option value="">Оберіть клієнта</option>
+                                      <option value="1">Олексій Ковальчук</option>
+                                      <option value="2">Ірина Василенко</option>
+                                      <option value="3">Максим Романенко</option>
+                                      <option value="4">Тетяна Дмитренко</option>
+                                      <option value="5">Олег Лисенко</option>
+                                  </select>
+                              </div>
+                              <div class="form-group">
+                                  <label class="form-label">Тип тренування</label>
+                                  <select class="form-select">
+                                      <option value="">Оберіть тип тренування</option>
+                                      <option value="yoga">Йога</option>
+                                      <option value="fitness">Фітнес</option>
+                                      <option value="pilates">Пілатес</option>
+                                      <option value="crossfit">Кросфіт</option>
+                                  </select>
+                              </div>
+                              <div class="form-group">
+                                  <label class="form-label">Дата</label>
+                                  <input type="date" class="form-input">
+                              </div>
+                              <div class="form-group">
+                                  <label class="form-label">Час</label>
+                                  <input type="time" class="form-input">
+                              </div>
+                              <div class="form-group">
+                                  <label class="form-label">Тренер</label>
+                                  <select class="form-select">
+                                      <option value="">Оберіть тренера</option>
+                                      <option value="1">Марина Петренко</option>
+                                      <option value="2">Андрій Сидоренко</option>
+                                      <option value="3">Наталія Кравчук</option>
+                                      <option value="4">Ігор Мельник</option>
+                                      <option value="5">Катерина Іванова</option>
+                                  </select>
+                              </div>
+                              <div class="form-group">
+                                  <label class="form-label">Статус</label>
+                                  <select class="form-select">
+                                      <option value="pending">Очікує</option>
+                                      <option value="confirmed">Підтверджено</option>
+                                      <option value="canceled">Скасовано</option>
+                                  </select>
+                              </div>
+                              <div class="form-group">
+                                  <label class="form-label">Примітки</label>
+                                  <textarea class="form-textarea"></textarea>
+                              </div>
+                          </form>
+                      </div>
+                      <div class="modal-footer">
+                          <button class="cancel-button">Скасувати</button>
+                          <button class="save-button">Зберегти</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <script>
+      // Делегування подій для модальних вікон
+document.addEventListener('click', function(event) {
+    // Відкриття модальних вікон
+    if (event.target.classList.contains('add-workout-button')) {
+        // Визначити, яке модальне вікно потрібно відкрити на основі тексту кнопки
+        if (event.target.innerText.includes('Новий користувач')) {
+            // Відкрити модальне вікно користувача
+            document.querySelector('#userModal .modal-title').textContent = 'Додати користувача';
+            document.getElementById('userForm').reset();
+            document.getElementById('userModal').style.display = 'block';
+        } else {
+            // Відкрити модальне вікно тренування
+            document.querySelector('#workoutModal .modal-title').textContent = 'Додати запис на тренування';
+            document.getElementById('workoutForm').reset();
+            document.getElementById('workoutModal').style.display = 'block';
+        }
+    }
+    
+    // Кнопки редагування тренування
+    if (event.target.classList.contains('edit-button') || 
+        event.target.closest('.edit-button')) {
+        const button = event.target.classList.contains('edit-button') ? 
+                        event.target : event.target.closest('.edit-button');
+        
+        // Перевірити, в якій таблиці знаходиться кнопка
+        if (button.closest('.workouts-management')) {
+            document.querySelector('#workoutModal .modal-title').textContent = 'Редагувати запис на тренування';
+            document.getElementById('workoutModal').style.display = 'block';
+        } else if (button.closest('.users-management')) {
+            const userId = button.getAttribute('data-id');
+            document.querySelector('#userModal .modal-title').textContent = 'Редагувати користувача';
+            // Тут можна додати код для завантаження даних користувача
+            document.getElementById('userModal').style.display = 'block';
+        }
+    }
+    
+    // Кнопки видалення користувача
+    if (event.target.classList.contains('delete-button') || 
+        event.target.closest('.delete-button')) {
+        const button = event.target.classList.contains('delete-button') ? 
+                        event.target : event.target.closest('.delete-button');
+        
+        if (button.closest('.users-management')) {
+            const userId = button.getAttribute('data-id');
+            document.getElementById('deleteUserId').value = userId;
+            document.getElementById('confirmDeleteModal').style.display = 'block';
+        }
+    }
+    
+    // Закриття модальних вікон
+    if (event.target.classList.contains('close-button') || 
+        event.target.closest('.close-button')) {
+        const modal = event.target.closest('.modal');
+        if (modal) {
+            modal.style.display = 'none';
+        }
+    }
+    
+    // Кнопки "Скасувати" закривають відповідні модальні вікна
+    if (event.target.classList.contains('cancel-button') || 
+        event.target.classList.contains('user-cancel-button') ||
+        event.target.classList.contains('confirm-cancel-button')) {
+        const modal = event.target.closest('.modal');
+        if (modal) {
+            modal.style.display = 'none';
+        }
+    }
+    
+    // Підтвердження видалення
+    if (event.target.classList.contains('confirm-delete-button')) {
+        const userId = document.getElementById('deleteUserId').value;
+        // Тут можна додати код для видалення користувача
+        console.log('Видалення користувача з ID:', userId);
+        document.getElementById('confirmDeleteModal').style.display = 'none';
+        // Після успішного видалення можна було б оновити таблицю або видалити рядок
+    }
+    
+    // Збереження даних користувача
+    if (event.target.classList.contains('user-save-button')) {
+        // Тут можна додати код для збереження даних користувача
+        console.log('Збереження даних користувача');
+        document.getElementById('userModal').style.display = 'none';
+        // Після успішного збереження можна було б оновити таблицю
+    }
+    
+    // Збереження даних тренування
+    if (event.target.classList.contains('save-button') && 
+        !event.target.classList.contains('user-save-button')) {
+        // Тут можна додати код для збереження даних тренування
+        console.log('Збереження даних тренування');
+        document.getElementById('workoutModal').style.display = 'none';
+        // Після успішного збереження можна було б оновити таблицю
+    }
+});
+
+// Закриття модальних вікон при кліку поза ними
+window.addEventListener('click', function(event) {
+    if (event.target.classList.contains('modal')) {
+        event.target.style.display = 'none';
+    }
+});
+  </script>
+</body>
+</html>

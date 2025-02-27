@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вхід в акаунт | FitnessOnlineClub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Базові стилі та змінні */
+        :root {
+            --primary-color: #2D5F9A;
+            --primary-dark: #234b7c;
+            --secondary-color: #4A4A4A;
+            --accent-color: #E8F1FA;
+            --text-color: #333;
+            --text-light: #666;
+            --text-dark: #222;
+            --background-light: #f8f9fa;
+            --white: #fff;
+            --border-color: #e6e6e6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+        }
+
+        body {
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: var(--background-light);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            color: var(--text-dark);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .auth-card {
+            background-color: var(--white);
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+
+        .auth-form h2 {
+            margin-bottom: 1.8rem;
+            text-align: center;
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 1.8rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(45, 95, 154, 0.2);
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 0.9rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.3s;
+            margin-top: 1rem;
+        }
+
+        .form-submit:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .form-footer {
+            margin-top: 1.5rem;
+            text-align: center;
+            color: var(--text-light);
+        }
+
+        .form-footer a {
+            color: var(--primary-color);
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .back-home {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-top: 1.5rem;
+            text-decoration: none;
+        }
+
+        .back-home i {
+            margin-right: 0.5rem;
+        }
+
+        .back-home:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <a href="index.html" class="logo"><span>Fitness</span>OnlineClub</a>
+        </div>
+        <div class="auth-card">
+            <form class="auth-form">
+                <h2>Вхід в акаунт</h2>
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" placeholder="Введіть ваш email" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Пароль</label>
+                    <input type="password" id="loginPassword" placeholder="Введіть ваш пароль" required>
+                </div>
+                <button type="submit" class="form-submit">Увійти</button>
+                <div class="form-footer">
+                    <p>Ще не маєте акаунта? <a href="register.html">Зареєструватися</a></p>
+                    <p><a href="#">Забули пароль?</a></p>
+                </div>
+            </form>
+        </div>
+        <div style="text-align: center; margin-top: 1.5rem;">
+            <a href="index.html" class="back-home"><i class="fas fa-arrow-left"></i> Повернутися на головну</a>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript для форми входу
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.querySelector('.auth-form');
+            
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+                
+                // Тут можна додати валідацію форми
+                
+                // Імітація відправки форми на сервер
+                console.log('Спроба входу:', { email, password });
+                
+                // Перенаправлення на головну сторінку після успішної авторизації
+                // window.location.href = 'index.html';
+                
+                // Або показати повідомлення про успішний вхід
+                alert('Авторизація успішна!');
+            });
+        });
+    </script>
+</body>
+</html>

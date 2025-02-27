@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Розклад тренувань | FitnessOnlineClub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        /* Базові стилі та змінні */
+        :root {
+            --primary-color: #2D5F9A;
+            --primary-dark: #234b7c;
+            --secondary-color: #4A4A4A;
+            --accent-color: #E8F1FA;
+            --text-color: #333;
+            --text-light: #666;
+            --text-dark: #222;
+            --background-light: #f8f9fa;
+            --white: #fff;
+            --border-color: #e6e6e6;
+            --success-color: #2A7E63;
+            --gray-light: #f1f3f5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+        }
+
+        body {
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: var(--background-light);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Шапка */
+        header {
+            background-color: var(--white);
+            color: var(--secondary-color);
+            padding: 0.8rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            color: var(--text-dark);
+        }
+
+        .logo span {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            transition: color 0.3s;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover:after,
+        .nav-links a.active:after {
+            width: 100%;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary-color);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.7rem 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .btn i {
+            margin-right: 0.5rem;
+        }
+
+        .btn-outlined {
+            background: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-filled {
+            background: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            color: white;
+        }
+
+        .btn-lg {
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-outlined:hover {
+            background: var(--accent-color);
+        }
+
+        .btn-filled:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Героїчний блок */
+        .hero {
+            height: 60vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/api/placeholder/1200/600') center/cover no-repeat;
+            color: white;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 20%;
+            background: linear-gradient(to top, var(--background-light), transparent);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 1.2rem;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Героїчний блок */
+        .hero {
+            height: 60vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("Images/filters_format.png") center/cover no-repeat;
+            color: white;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 20%;
+            background: linear-gradient(to top, var(--background-light), transparent);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 1.2rem;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Сторінка розкладу */
+        .schedule-section {
+            padding: 4rem 0;
+        }
+
+        .schedule-filters {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            align-items: flex-end;
+        }
+
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .filter-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .filter-group select,
+        .filter-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background: var(--white);
+            color: var(--text-color);
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .filter-group select:focus,
+        .filter-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(45, 95, 154, 0.2);
+        }
+
+        .schedule-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .schedule-tab {
+            padding: 0.8rem 1.5rem;
+            background: var(--white);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            border: 1px solid var(--border-color);
+        }
+
+        .schedule-tab:hover {
+            background: var(--accent-color);
+        }
+
+        .schedule-tab.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .schedule-content {
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .schedule-table th,
+        .schedule-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .schedule-table th {
+            background: var(--accent-color);
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .schedule-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .schedule-table tr:hover {
+            background-color: var(--gray-light);
+        }
+
+        /* Підвал */
+        footer {
+            background-color: var(--secondary-color);
+            color: #e0e0e0;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            color: var(--white);
+            font-weight: 600;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background: var(--primary-color);
+        }
+
+        .footer-links a {
+            display: block;
+            margin-bottom: 0.7rem;
+            transition: color 0.3s;
+            color: #b0b0b0;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+
+        .footer-column p {
+            color: #b0b0b0;
+            margin-bottom: 0.8rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            margin-top: 3rem;
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #9e9e9e;
+            font-size: 0.9rem;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 0.9rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.3s;
+            margin-top: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(45, 95, 154, 0.2);
+        }
+
+        /* Адаптивність */
+        @media (max-width: 992px) {
+            .schedule-filters {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .filter-group {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                flex-direction: row;
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            .nav-links a {
+                padding: 0.3rem 0.5rem;
+            }
+            
+            .schedule-content {
+                overflow-x: auto;
+            }
+        }
+
+        /* Анімації */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="navbar">
+              <a href="index.html" class="logo"><span>Fitness</span>OnlineClub</a>
+              <ul class="nav-links">
+                  <li><a href="index.html">Головна</a></li>
+                  <li><a href="about.html">Про нас</a></li>
+                  <li><a href="trainers.html">Тренери</a></li>
+                  <li><a href="booking.html">Запис на тренування</a></li>
+                  <li><a href="schedule.html" class="active">Розклад</a></li>
+                  <li><a href="contacts.html">Контакти</a></li>
+              </ul>
+              <div class="auth-buttons">
+                  <button class="btn btn-outlined" id="loginBtn"><i class="fas fa-user"></i> Увійти</button>
+                  <button class="btn btn-filled" id="registerBtn"><i class="fas fa-user-plus"></i> Реєстрація</button>
+              </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Героїчний блок -->
+    <section class="hero">
+      <div class="container">
+          <div class="hero-content">
+              <h1>Розклад тренувань</h1>
+              <p>Знайдіть зручний час для тренувань у нашому клубі</p>
+          </div>
+      </div>
+  </section>
+
+    <main>
+        <section class="schedule-section">
+            <div class="container">
+                <div class="schedule-filters fade-in">
+                    <div class="filter-group">
+                        <label for="training-type">Тип тренування:</label>
+                        <select id="training-type">
+                            <option value="all">Всі тренування</option>
+                            <option value="group">Групові</option>
+                            <option value="individual">Індивідуальні</option>
+                            <option value="functional">Функціональні</option>
+                            <option value="yoga">Йога</option>
+                            <option value="stretching">Розтяжка</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="trainer">Тренер:</label>
+                        <select id="trainer">
+                            <option value="all">Всі тренери</option>
+                            <option value="1">Анна Ковальчук</option>
+                            <option value="2">Максим Петренко</option>
+                            <option value="3">Ольга Шевченко</option>
+                            <option value="4">Сергій Бондаренко</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="date">Дата:</label>
+                        <input type="date" id="date">
+                    </div>
+                    <button class="btn btn-filled">Застосувати фільтри</button>
+                </div>
+                
+                <div class="schedule-tabs fade-in">
+                    <div class="schedule-tab active" data-day="monday">Понеділок</div>
+                    <div class="schedule-tab" data-day="tuesday">Вівторок</div>
+                    <div class="schedule-tab" data-day="wednesday">Середа</div>
+                    <div class="schedule-tab" data-day="thursday">Четвер</div>
+                    <div class="schedule-tab" data-day="friday">П'ятниця</div>
+                    <div class="schedule-tab" data-day="saturday">Субота</div>
+                    <div class="schedule-tab" data-day="sunday">Неділя</div>
+                </div>
+                
+                <div class="schedule-content fade-in">
+                    <table class="schedule-table">
+                        <thead>
+                            <tr>
+                                <th>Час</th>
+                                <th>Тренування</th>
+                                <th>Тренер</th>
+                                <th>Тривалість</th>
+                                <th>Місце</th>
+                                <th>Дії</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>07:00</td>
+                                <td>Ранкова йога</td>
+                                <td>Ольга Шевченко</td>
+                                <td>60 хв</td>
+                                <td>Зал №2</td>
+                                <td><a href="booking.html?class=1" class="btn btn-filled btn-small">Записатись</a></td>
+                            </tr>
+                            <tr>
+                                <td>09:00</td>
+                                <td>Функціональний тренінг</td>
+                                <td>Максим Петренко</td>
+                                <td>45 хв</td>
+                                <td>Зал №1</td>
+                                <td><a href="booking.html?class=2" class="btn btn-filled btn-small">Записатись</a></td>
+                            </tr>
+                            <tr>
+                                <td>11:00</td>
+                                <td>Пілатес</td>
+                                <td>Анна Ковальчук</td>
+                                <td>60 хв</td>
+                                <td>Зал №3</td>
+                                <td><a href="booking.html?class=3" class="btn btn-filled btn-small">Записатись</a></td>
+                            </tr>
+                            <tr>
+                                <td>13:30</td>
+                                <td>Кросфіт</td>
+                                <td>Сергій Бондаренко</td>
+                                <td>45 хв</td>
+                                <td>Зал №1</td>
+                                <td><a href="booking.html?class=4" class="btn btn-filled btn-small">Записатись</a></td>
+                            </tr>
+                            <tr>
+                                <td>16:00</td>
+                                <td>Зумба</td>
+                                <td>Анна Ковальчук</td>
+                                <td>60 хв</td>
+                                <td>Зал №2</td>
+                                <td><a href="booking.html?class=5" class="btn btn-filled btn-small">Записатись</a></td>
+                            </tr>
+                            <tr>
+                                <td>18:00</td>
+                                <td>Силове тренування</td>
+                                <td>Максим Петренко</td>
+                                <td>50 хв</td>
+                                <td>Зал №1</td>
+                                <td><a href="booking.html?class=6" class="btn btn-filled btn-small">Записатись</a></td>
+                            </tr>
+                            <tr>
+                                <td>19:30</td>
+                                <td>Стретчинг</td>
+                                <td>Ольга Шевченко</td>
+                                <td>45 хв</td>
+                                <td>Зал №3</td>
+                                <td><a href="booking.html?class=7" class="btn btn-filled btn-small">Записатись</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Підвал -->
+    <footer>
+      <div class="container">
+          <div class="footer-content">
+              <div class="footer-column">
+                  <h3>FitnessOnlineClub</h3>
+                  <p>Ваш надійний партнер на шляху до здорового та активного способу життя. Ми допомагаємо клієнтам досягати їхніх фітнес-цілей з 2010 року.</p>
+                  <div class="social-links">
+                      <a href="#"><i class="fab fa-facebook-f"></i></a>
+                      <a href="#"><i class="fab fa-instagram"></i></a>
+                      <a href="#"><i class="fab fa-telegram"></i></a>
+                      <a href="#"><i class="fab fa-youtube"></i></a>
+                  </div>
+              </div>
+              <div class="footer-column">
+                  <h3>Навігація</h3>
+                  <div class="footer-links">
+                      <a href="index.html">Головна</a>
+                      <a href="about.html">Про нас</a>
+                      <a href="trainers.html">Тренери</a>
+                      <a href="booking.html">Запис на тренування</a>
+                      <a href="schedule.html">Розклад</a>
+                      <a href="contacts.html">Контакти</a>
+                  </div>
+              </div>
+              <div class="footer-column">
+                  <h3>Контакти</h3>
+                  <p><i class="fas fa-map-marker-alt"></i> вул. Спортивна, 42, м. Київ</p>
+                  <p><i class="fas fa-phone"></i> +380 (50) 123-45-67</p>
+                  <p><i class="fas fa-envelope"></i> info@fitnessonlineclub.ua</p>
+                  <p><i class="fas fa-clock"></i> Щодня: 6:00 - 23:00</p>
+              </div>
+              <div class="footer-column">
+                  <h3>Підписка</h3>
+                  <p>Підпишіться на нашу розсилку, щоб отримувати новини та спеціальні пропозиції</p>
+                  <form class="footer-form">
+                      <div class="form-group">
+                          <input type="email" placeholder="Ваш email" required>
+                      </div>
+                      <button type="submit" class="form-submit">Підписатися</button>
+                  </form>
+                  </div>
+              </div>
+              <div class="copyright">
+                  <p>&copy; 2025 FitnessOnlineClub. Усі права захищені.</p>
+              </div>
+          </div>
+      </footer>
+
+    <script>
+        // Анімація fade-in при прокрутці
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            function checkFade() {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementTop < windowHeight - 100) {
+                        element.classList.add('visible');
+                    }
+                });
+            }
+            
+            // Початкова перевірка
+            checkFade();
+            
+            // Перевірка при прокрутці
+            window.addEventListener('scroll', checkFade);
+            
+            // Перемикання вкладок розкладу
+            const tabs = document.querySelectorAll('.schedule-tab');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Видалення активного класу з усіх вкладок
+                    tabs.forEach(t => t.classList.remove('active'));
+                    
+                    // Додавання активного класу вибраній вкладці
+                    this.classList.add('active');
+                    
+                    // Логіка для перемикання вмісту розкладу на основі дня
+                    const day = this.getAttribute('data-day');
+                    console.log('Selected day:', day);
+                    
+                    // Тут можна додати логіку для завантаження даних розкладу для вибраного дня
+                });
+            });
+        });
+
+        // Авторизація та реєстрація
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
+
+        // Перенаправлення на сторінку входу
+        loginBtn.addEventListener('click', function() {
+            window.location.href = 'login.html';
+        });
+
+        // Перенаправлення на сторінку реєстрації
+        registerBtn.addEventListener('click', function() {
+            window.location.href = 'register.html';
+        });
+
+        // Решта коду для ефектів та інших функцій залишається
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            function checkFade() {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        element.classList.add('visible');
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', checkFade);
+            checkFade(); // Перевірка при завантаженні
+        });
+
+        // Кнопки запису на тренування
+        const trainingButtons = document.querySelectorAll('.btn-filled');
+        trainingButtons.forEach(button => {
+            if (button.textContent.includes('Записатись')) {
+                button.addEventListener('click', function() {
+                    window.location.href = 'booking.html';
+                });
+            }
+        });
+    </script>
+</body>
+</html>

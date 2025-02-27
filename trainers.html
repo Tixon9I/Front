@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тренери | FitnessOnlineClub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        /* Базові стилі та змінні */
+        :root {
+            --primary-color: #2D5F9A;
+            --primary-dark: #234b7c;
+            --secondary-color: #4A4A4A;
+            --accent-color: #E8F1FA;
+            --text-color: #333;
+            --text-light: #666;
+            --text-dark: #222;
+            --background-light: #f8f9fa;
+            --white: #fff;
+            --border-color: #e6e6e6;
+            --success-color: #2A7E63;
+            --gray-light: #f1f3f5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+        }
+
+        body {
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: var(--background-light);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Шапка */
+        header {
+            background-color: var(--white);
+            color: var(--secondary-color);
+            padding: 0.8rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            color: var(--text-dark);
+        }
+
+        .logo span {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            transition: color 0.3s;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover:after,
+        .nav-links a.active:after {
+            width: 100%;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary-color);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.7rem 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .btn i {
+            margin-right: 0.5rem;
+        }
+
+        .btn-outlined {
+            background: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-filled {
+            background: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            color: white;
+        }
+
+        .btn-lg {
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-outlined:hover {
+            background: var(--accent-color);
+        }
+
+        .btn-filled:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Героїчний блок */
+        .hero {
+            height: 60vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("Images/trainers.png") center/cover no-repeat;
+            color: white;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 20%;
+            background: linear-gradient(to top, var(--background-light), transparent);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 1.2rem;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Фільтри тренерів */
+        .trainers-filters {
+            padding: 2.5rem 0;
+            background-color: var(--white);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .filters-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            min-width: 200px;
+        }
+
+        .filter-group label {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .filter-group select {
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background-color: var(--white);
+            color: var(--text-color);
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+
+        .filter-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(45, 95, 154, 0.1);
+        }
+
+        /* Список тренерів */
+        .trainers-list {
+            padding: 4rem 0;
+            background-color: var(--background-light);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            position: relative;
+            padding-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: var(--primary-color);
+        }
+
+        .trainers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .trainer-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .trainer-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--primary-color);
+        }
+
+        .trainer-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .trainer-image {
+            height: 250px;
+            background-position: center;
+            background-size: cover;
+        }
+
+        .trainer-info {
+            padding: 1.8rem;
+        }
+
+        .trainer-info h3 {
+            font-weight: 600;
+            font-size: 1.4rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .trainer-specialization {
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+
+        .trainer-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .star {
+            color: #ffd700;
+            font-size: 1.1rem;
+        }
+
+        .trainer-rating span {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .trainer-description {
+            margin-bottom: 1.8rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .trainer-action {
+            text-align: center;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            font-size: 1.2rem;
+            color: var(--text-light);
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-top: 2rem;
+        }
+
+        /* Підвал */
+        footer {
+            background-color: var(--secondary-color);
+            color: #e0e0e0;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            color: var(--white);
+            font-weight: 600;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background: var(--primary-color);
+        }
+
+        .footer-links a {
+            display: block;
+            margin-bottom: 0.7rem;
+            transition: color 0.3s;
+            color: #b0b0b0;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+
+        .footer-column p {
+            color: #b0b0b0;
+            margin-bottom: 0.8rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            margin-top: 3rem;
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #9e9e9e;
+            font-size: 0.9rem;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 0.9rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.3s;
+            margin-top: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(45, 95, 154, 0.2);
+        }
+
+        /* Адаптивність */
+        @media (max-width: 992px) {
+            .trainers-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .trainers-header p {
+                font-size: 1.1rem;
+            }
+            
+            .trainer-card {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                flex-direction: row;
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            .nav-links a {
+                padding: 0.3rem 0.5rem;
+            }
+            
+            .trainers-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .trainers-header p {
+                font-size: 1rem;
+            }
+            
+            .trainers-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Анімації */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка сайту -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo"><span>Fitness</span>OnlineClub</a>
+                <ul class="nav-links">
+                  <li><a href="index.html">Головна</a></li>
+                  <li><a href="about.html">Про нас</a></li>
+                  <li><a href="trainers.html" class="active">Тренери</a></li>
+                  <li><a href="booking.html">Запис на тренування</a></li>
+                  <li><a href="schedule.html">Розклад</a></li>
+                  <li><a href="contacts.html">Контакти</a></li>
+              </ul>
+                <div class="auth-buttons">
+                    <button class="btn btn-outlined" id="loginBtn"><i class="fas fa-user"></i> Увійти</button>
+                    <button class="btn btn-filled" id="registerBtn"><i class="fas fa-user-plus"></i> Реєстрація</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Героїчний блок -->
+    <section class="hero">
+      <div class="container">
+          <div class="hero-content">
+              <h1>Наші професійні тренери</h1>
+              <p>Навчайтеся у найкращих спеціалістів своєї справи та досягайте неймовірних результатів</p>
+          </div>
+      </div>
+  </section>
+
+    <!-- Фільтри для тренерів -->
+    <section class="trainers-filters">
+        <div class="container">
+            <div class="filters-container">
+                <div class="filter-group">
+                    <label for="specialization">Спеціалізація</label>
+                    <select id="specialization">
+                        <option value="">Всі спеціалізації</option>
+                        <option value="strength">Силові тренування</option>
+                        <option value="cardio">Кардіо</option>
+                        <option value="yoga">Йога</option>
+                        <option value="crossfit">Кросфіт</option>
+                        <option value="pilates">Пілатес</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="experience">Досвід роботи</label>
+                    <select id="experience">
+                        <option value="">Будь-який досвід</option>
+                        <option value="1-3">1-3 роки</option>
+                        <option value="3-5">3-5 років</option>
+                        <option value="5+">Більше 5 років</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="rating">Рейтинг</label>
+                    <select id="rating">
+                        <option value="">Будь-який рейтинг</option>
+                        <option value="4+">4+ зірки</option>
+                        <option value="4.5+">4.5+ зірки</option>
+                        <option value="5">5 зірок</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="sort">Сортування</label>
+                    <select id="sort">
+                        <option value="rating">За рейтингом</option>
+                        <option value="experience">За досвідом</option>
+                        <option value="name">За ім'ям</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Список тренерів -->
+    <section class="trainers-list">
+        <div class="container">
+            <h2 class="section-title">Познайомтесь з нашими <span>експертами</span></h2>
+            <div class="trainers-grid" id="trainers-container">
+                <!-- Тренери будуть додані через JavaScript -->
+            </div>
+            <div class="no-results" id="no-results" style="display: none;">
+                <p>На жаль, тренери, що відповідають вашим критеріям, не знайдені</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Підвал -->
+    <footer>
+      <div class="container">
+          <div class="footer-content">
+              <div class="footer-column">
+                  <h3>FitnessOnlineClub</h3>
+                  <p>Ваш надійний партнер на шляху до здорового та активного способу життя. Ми допомагаємо клієнтам досягати їхніх фітнес-цілей з 2010 року.</p>
+                  <div class="social-links">
+                      <a href="#"><i class="fab fa-facebook-f"></i></a>
+                      <a href="#"><i class="fab fa-instagram"></i></a>
+                      <a href="#"><i class="fab fa-telegram"></i></a>
+                      <a href="#"><i class="fab fa-youtube"></i></a>
+                  </div>
+              </div>
+              <div class="footer-column">
+                  <h3>Навігація</h3>
+                  <div class="footer-links">
+                      <a href="index.html">Головна</a>
+                      <a href="about.html">Про нас</a>
+                      <a href="trainers.html">Тренери</a>
+                      <a href="booking.html">Запис на тренування</a>
+                      <a href="schedule.html">Розклад</a>
+                      <a href="contacts.html">Контакти</a>
+                  </div>
+              </div>
+              <div class="footer-column">
+                  <h3>Контакти</h3>
+                  <p><i class="fas fa-map-marker-alt"></i> вул. Спортивна, 42, м. Київ</p>
+                  <p><i class="fas fa-phone"></i> +380 (50) 123-45-67</p>
+                  <p><i class="fas fa-envelope"></i> info@fitnessonlineclub.ua</p>
+                  <p><i class="fas fa-clock"></i> Щодня: 6:00 - 23:00</p>
+              </div>
+              <div class="footer-column">
+                  <h3>Підписка</h3>
+                  <p>Підпишіться на нашу розсилку, щоб отримувати новини та спеціальні пропозиції</p>
+                  <form class="footer-form">
+                      <div class="form-group">
+                          <input type="email" placeholder="Ваш email" required>
+                      </div>
+                      <button type="submit" class="form-submit">Підписатися</button>
+                  </form>
+                  </div>
+              </div>
+              <div class="copyright">
+                  <p>&copy; 2025 FitnessOnlineClub. Усі права захищені.</p>
+              </div>
+          </div>
+      </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Дані про тренерів (в реальному додатку будуть завантажені з API)
+        const trainers = [
+            {
+                id: 1,
+                name: 'Олександр Петренко',
+                specialization: 'strength',
+                experience: '7',
+                rating: 4.8,
+                description: 'Сертифікований тренер з силових тренувань з 7-річним досвідом. Спеціалізується на програмах набору мязової маси та силового тренінгу.',
+                image: "Images/1.jpg"
+            },
+            {
+                id: 2,
+                name: 'Марія Ковальчук',
+                specialization: 'yoga',
+                experience: '5',
+                rating: 5.0,
+                description: 'Інструктор з йоги, має сертифікати міжнародного зразка. Проводить заняття для початківців та просунутих рівнів.',
+                image: "Images/2.jpg"
+            },
+            {
+                id: 3,
+                name: 'Андрій Савченко',
+                specialization: 'crossfit',
+                experience: '4',
+                rating: 4.6,
+                description: 'Професійний тренер з кросфіту, учасник національних змагань. Допоможе досягти нових вершин у фізичній підготовці.',
+                image: "Images/3.jpg"
+            },
+            {
+                id: 4,
+                name: 'Юлія Іваненко',
+                specialization: 'pilates',
+                experience: '6',
+                rating: 4.9,
+                description: 'Тренер з пілатесу, фахівець з реабілітації. Допомагає клієнтам відновитися після травм та покращити гнучкість.',
+                image: "Images/4.jpg"
+            },
+            {
+                id: 5,
+                name: 'Валентин Мороз',
+                specialization: 'cardio',
+                experience: '3',
+                rating: 4.7,
+                description: 'Інструктор з кардіотренувань. Розробляє індивідуальні програми для схуднення та підвищення витривалості.',
+                image: "Images/5.jpg"
+            },
+            {
+              id: 6,
+                name: 'Наталія Шевченко',
+                specialization: 'yoga',
+                experience: '8',
+                rating: 4.9,
+                description: 'Майстер йоги з 8-річним досвідом. Спеціалізується на хатха та кундаліні йозі. Допомагає клієнтам знайти внутрішню гармонію.',
+                image: "Images/6.jpg"
+            },
+            {
+                id: 7,
+                name: 'Віктор Коваленко',
+                specialization: 'strength',
+                experience: '10',
+                rating: 4.8,
+                description: 'Досвідчений тренер з силових тренувань. Колишній професійний спортсмен, допомагає клієнтам безпечно досягати своїх фітнес-цілей.',
+                image: "Images/7.jpg"
+            },
+            {
+                id: 8,
+                name: 'Софія Мельник',
+                specialization: 'pilates',
+                experience: '4',
+                rating: 4.5,
+                description: 'Сертифікований інструктор з пілатесу. Фокусується на поставі та зміцненні кору, підходить для клієнтів різного рівня підготовки.',
+                image: "Images/8.jpg"
+            },
+            {
+                id: 9,
+                name: 'Денис Козак',
+                specialization: 'cardio',
+                experience: '6',
+                rating: 4.7,
+                description: 'Фахівець з кардіотренувань та інтервального тренінгу. Допомагає клієнтам покращити серцево-судинну систему та скинути вагу.',
+                image: "Images/9.jpg"
+            }
+        ];
+
+        // Відображення тренерів на сторінці
+        function displayTrainers(trainersData) {
+            const container = document.getElementById('trainers-container');
+            const noResults = document.getElementById('no-results');
+            
+            container.innerHTML = '';
+            
+            if (trainersData.length === 0) {
+                noResults.style.display = 'block';
+                return;
+            }
+            
+            noResults.style.display = 'none';
+            
+            trainersData.forEach(trainer => {
+                // Переклад спеціалізації
+                let specializationText = '';
+                switch(trainer.specialization) {
+                    case 'strength':
+                        specializationText = 'Силові тренування';
+                        break;
+                    case 'cardio':
+                        specializationText = 'Кардіо';
+                        break;
+                    case 'yoga':
+                        specializationText = 'Йога';
+                        break;
+                    case 'crossfit':
+                        specializationText = 'Кросфіт';
+                        break;
+                    case 'pilates':
+                        specializationText = 'Пілатес';
+                        break;
+                    default:
+                        specializationText = 'Універсальний тренер';
+                }
+                
+                // Генерація зірок для рейтингу
+                let starsHTML = '';
+                for (let i = 1; i <= 5; i++) {
+                    if (i <= Math.floor(trainer.rating)) {
+                        starsHTML += '<i class="fas fa-star star"></i>';
+                    } else if (i - 0.5 <= trainer.rating) {
+                        starsHTML += '<i class="fas fa-star-half-alt star"></i>';
+                    } else {
+                        starsHTML += '<i class="far fa-star star"></i>';
+                    }
+                }
+                
+                const trainerCard = document.createElement('div');
+                trainerCard.className = 'trainer-card fade-in';
+                
+                trainerCard.innerHTML = `
+                    <div class="trainer-image" style="background-image: url('${trainer.image}')"></div>
+                    <div class="trainer-info">
+                        <h3>${trainer.name}</h3>
+                        <div class="trainer-specialization">${specializationText}</div>
+                        <div class="trainer-rating">
+                            ${starsHTML}
+                            <span>(${trainer.rating})</span>
+                        </div>
+                        <p class="trainer-description">${trainer.description}</p>
+                        <div class="trainer-action">
+                            <a href="trainer-detail.html?id=${trainer.id}" class="btn btn-filled">Детальніше</a>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(trainerCard);
+                
+                // Додаємо невелику затримку для анімації
+                setTimeout(() => {
+                    trainerCard.classList.add('visible');
+                }, 100 * container.children.length);
+            });
+        }
+
+        // Фільтрація тренерів
+        function filterTrainers() {
+            const specializationFilter = document.getElementById('specialization').value;
+            const experienceFilter = document.getElementById('experience').value;
+            const ratingFilter = document.getElementById('rating').value;
+            const sortBy = document.getElementById('sort').value;
+            
+            let filteredTrainers = [...trainers];
+            
+            // Фільтр за спеціалізацією
+            if (specializationFilter) {
+                filteredTrainers = filteredTrainers.filter(trainer => 
+                    trainer.specialization === specializationFilter
+                );
+            }
+            
+            // Фільтр за досвідом
+            if (experienceFilter) {
+                const [min, max] = experienceFilter.split('-');
+                if (max) {
+                    filteredTrainers = filteredTrainers.filter(trainer => 
+                        parseInt(trainer.experience) >= parseInt(min) && 
+                        parseInt(trainer.experience) < parseInt(max)
+                    );
+                } else {
+                    // Для варіанту "5+"
+                    const minExperience = parseInt(min);
+                    filteredTrainers = filteredTrainers.filter(trainer => 
+                        parseInt(trainer.experience) >= minExperience
+                    );
+                }
+            }
+            
+            // Фільтр за рейтингом
+            if (ratingFilter) {
+                const minRating = parseFloat(ratingFilter);
+                filteredTrainers = filteredTrainers.filter(trainer => 
+                    trainer.rating >= minRating
+                );
+            }
+            
+            // Сортування
+            switch (sortBy) {
+                case 'rating':
+                    filteredTrainers.sort((a, b) => b.rating - a.rating);
+                    break;
+                case 'experience':
+                    filteredTrainers.sort((a, b) => parseInt(b.experience) - parseInt(a.experience));
+                    break;
+                case 'name':
+                    filteredTrainers.sort((a, b) => a.name.localeCompare(b.name));
+                    break;
+            }
+            
+            displayTrainers(filteredTrainers);
+        }
+
+        // Запуск фільтрації при зміні будь-якого фільтра
+        document.getElementById('specialization').addEventListener('change', filterTrainers);
+        document.getElementById('experience').addEventListener('change', filterTrainers);
+        document.getElementById('rating').addEventListener('change', filterTrainers);
+        document.getElementById('sort').addEventListener('change', filterTrainers);
+        
+        // Відображення всіх тренерів при завантаженні сторінки
+        window.addEventListener('load', () => {
+            // Сортуємо спочатку за рейтингом за замовчуванням
+            trainers.sort((a, b) => b.rating - a.rating);
+            displayTrainers(trainers);
+        });
+        
+        // Авторизація та реєстрація
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
+
+        // Перенаправлення на сторінку входу
+        loginBtn.addEventListener('click', function() {
+            window.location.href = 'login.html';
+        });
+
+        // Перенаправлення на сторінку реєстрації
+        registerBtn.addEventListener('click', function() {
+            window.location.href = 'register.html';
+        });
+
+        // Решта коду для ефектів та інших функцій залишається
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            function checkFade() {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        element.classList.add('visible');
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', checkFade);
+            checkFade(); // Перевірка при завантаженні
+        });
+
+        // Кнопки запису на тренування
+        const trainingButtons = document.querySelectorAll('.btn-filled');
+        trainingButtons.forEach(button => {
+            if (button.textContent.includes('Записатись')) {
+                button.addEventListener('click', function() {
+                    window.location.href = 'booking.html';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
