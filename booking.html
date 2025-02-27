@@ -768,8 +768,6 @@
         // Простий скрипт для базової валідації форми
         document.getElementById('training-booking-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            // Тут може бути додатковий код для валідації та відправки форми
             alert('Ваше бронювання прийнято! Очікуйте підтвердження на email.');
         });
 
@@ -787,7 +785,6 @@
             window.location.href = 'register.html';
         });
 
-        // Решта коду для ефектів та інших функцій залишається
         document.addEventListener('DOMContentLoaded', function() {
             const fadeElements = document.querySelectorAll('.fade-in');
             
@@ -803,7 +800,7 @@
             }
             
             window.addEventListener('scroll', checkFade);
-            checkFade(); // Перевірка при завантаженні
+            checkFade();
         });
 
         // Кнопки запису на тренування

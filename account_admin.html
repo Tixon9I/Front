@@ -1244,11 +1244,9 @@
   </div>
 
   <script>
-      // Делегування подій для модальних вікон
 document.addEventListener('click', function(event) {
     // Відкриття модальних вікон
     if (event.target.classList.contains('add-workout-button')) {
-        // Визначити, яке модальне вікно потрібно відкрити на основі тексту кнопки
         if (event.target.innerText.includes('Новий користувач')) {
             // Відкрити модальне вікно користувача
             document.querySelector('#userModal .modal-title').textContent = 'Додати користувача';
@@ -1275,7 +1273,6 @@ document.addEventListener('click', function(event) {
         } else if (button.closest('.users-management')) {
             const userId = button.getAttribute('data-id');
             document.querySelector('#userModal .modal-title').textContent = 'Редагувати користувача';
-            // Тут можна додати код для завантаження даних користувача
             document.getElementById('userModal').style.display = 'block';
         }
     }
@@ -1315,27 +1312,21 @@ document.addEventListener('click', function(event) {
     // Підтвердження видалення
     if (event.target.classList.contains('confirm-delete-button')) {
         const userId = document.getElementById('deleteUserId').value;
-        // Тут можна додати код для видалення користувача
         console.log('Видалення користувача з ID:', userId);
         document.getElementById('confirmDeleteModal').style.display = 'none';
-        // Після успішного видалення можна було б оновити таблицю або видалити рядок
     }
     
     // Збереження даних користувача
     if (event.target.classList.contains('user-save-button')) {
-        // Тут можна додати код для збереження даних користувача
         console.log('Збереження даних користувача');
         document.getElementById('userModal').style.display = 'none';
-        // Після успішного збереження можна було б оновити таблицю
     }
     
     // Збереження даних тренування
     if (event.target.classList.contains('save-button') && 
         !event.target.classList.contains('user-save-button')) {
-        // Тут можна додати код для збереження даних тренування
         console.log('Збереження даних тренування');
         document.getElementById('workoutModal').style.display = 'none';
-        // Після успішного збереження можна було б оновити таблицю
     }
 });
 

@@ -328,20 +328,13 @@
             const adminFields = document.querySelector('.admin-fields');
             const securityCode = document.querySelector('.security-code');
             
-            // Обробка вибору ролі
             roleOptions.forEach(option => {
                 option.addEventListener('click', function() {
-                    // Видалення активного класу з усіх опцій
                     roleOptions.forEach(opt => opt.classList.remove('active'));
-                    
-                    // Додавання активного класу до обраної опції
                     this.classList.add('active');
-                    
-                    // Оновлення прихованого поля з роллю
                     const role = this.getAttribute('data-role');
                     userRoleInput.value = role;
-                    
-                    // Відображення/приховування додаткових полів залежно від ролі
+
                     if (role === 'coach') {
                         coachFields.style.display = 'block';
                         adminFields.style.display = 'none';
@@ -367,13 +360,11 @@
                 const passwordConfirm = document.getElementById('registerPasswordConfirm').value;
                 const role = userRoleInput.value;
                 
-                // Валідація форми
                 if (password !== passwordConfirm) {
                     alert('Паролі не співпадають!');
                     return;
                 }
                 
-                // Збір додаткових даних залежно від ролі
                 let userData = { name, email, phone, password, role };
                 
                 if (role === 'coach') {
@@ -389,7 +380,6 @@
                     userData.position = document.getElementById('adminPosition').value;
                     userData.securityCode = document.getElementById('securityCode').value;
                     
-                    // Перевірка коду безпеки для адміністратора (приклад)
                     if (userData.securityCode !== '123456') {
                         alert('Невірний код безпеки для адміністратора');
                         return;
@@ -398,10 +388,8 @@
                 
                 console.log('Дані реєстрації:', userData);
                 
-                // Збереження інформації про користувача в localStorage для демонстрації
                 localStorage.setItem('currentUser', JSON.stringify(userData));
                 
-                // Перенаправлення до кабінету користувача залежно від ролі
                 if (role === 'client') {
                     window.location.href = 'client-dashboard.html';
                 } else if (role === 'coach') {

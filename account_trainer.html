@@ -604,9 +604,8 @@
             font-weight: 500;
         }
 
-        /* Оптимізовані медіа-запити для запобігання прокрутці */
+        /* Адаптивність */
         @media (min-width: 1401px) {
-            /* Додаткові налаштування для дуже великих екранів */
             .container {
                 max-width: 1600px;
             }
@@ -625,7 +624,6 @@
                 max-width: 1300px;
             }
             
-            /* Оптимізації для запобігання прокрутці */
             .dashboard-stats {
                 grid-template-columns: repeat(4, 1fr);
             }
@@ -633,7 +631,7 @@
 
         @media (max-width: 1200px) {
             .dashboard-container {
-                grid-template-columns: 230px 1fr; /* Зменшуємо бічну панель */
+                grid-template-columns: 230px 1fr;
             }
             
             .dashboard-stats {
@@ -641,7 +639,7 @@
             }
             
             .dashboard-content {
-                grid-template-columns: 1fr; /* Перехід на один стовпець */
+                grid-template-columns: 1fr;
             }
         }
 
@@ -828,7 +826,6 @@
             border-radius: 20px;
         }
 
-        /* Додатковий стиль для респонсивності */
         @media (max-width: 576px) {
             .registration-header {
                 flex-direction: column;
@@ -1349,14 +1346,11 @@
   </div>
 
   <script>
-      // Спрощений JavaScript для демонстрації
       document.addEventListener('DOMContentLoaded', function() {
           // Відображення імені користувача
           const userNameElement = document.getElementById('userName');
           const userAvatarElement = document.getElementById('userAvatar');
           
-          // Приклад отримання даних користувача з локального сховища
-          // Якщо ви використовуєте реальний бекенд, ці дані будуть отримані з API
           const userData = {
               firstName: 'Михайло',
               lastName: 'Тренер',
@@ -1373,9 +1367,7 @@
           const menuItems = document.querySelectorAll('.sidebar-menu-link');
           menuItems.forEach(item => {
               item.addEventListener('click', function(e) {
-                  // Видалення активного класу з усіх елементів
                   menuItems.forEach(i => i.classList.remove('active'));
-                  // Додавання активного класу до натиснутого елемента
                   this.classList.add('active');
               });
           });
@@ -1383,7 +1375,6 @@
 
       // Функціонал для управління записами на тренування
 document.addEventListener('DOMContentLoaded', function() {
-    // Отримання елементів кнопок
     const confirmButtons = document.querySelectorAll('.registration-action.confirm');
     const editButtons = document.querySelectorAll('.registration-action.edit');
     const removeButtons = document.querySelectorAll('.registration-action.remove');
@@ -1393,7 +1384,6 @@ document.addEventListener('DOMContentLoaded', function() {
     confirmButtons.forEach(button => {
         button.addEventListener('click', function() {
             this.classList.toggle('active');
-            // Тут можна додати код для відправки даних на сервер
         });
     });
     
@@ -1402,7 +1392,6 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', function() {
             const clientElement = this.closest('.client-registration');
             const clientName = clientElement.querySelector('.registration-client-name').textContent;
-            // Тут можна додати модальне вікно для редагування
             alert(`Редагування запису для клієнта: ${clientName}`);
         });
     });
@@ -1414,7 +1403,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const clientName = clientElement.querySelector('.registration-client-name').textContent;
             if (confirm(`Ви впевнені, що хочете видалити запис для клієнта: ${clientName}?`)) {
                 clientElement.remove();
-                // Оновлення лічильника клієнтів після видалення
                 const regItem = this.closest('.registration-item');
                 const countElement = regItem.querySelector('.clients-count');
                 const currentCount = countElement.textContent.split('/')[0];
@@ -1429,7 +1417,6 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', function() {
             const regItem = this.closest('.registration-item');
             const title = regItem.querySelector('.registration-title').textContent;
-            // Тут можна додати модальне вікно для вибору клієнта
             alert(`Додавання клієнта до тренування: ${title}`);
         });
     });

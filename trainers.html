@@ -638,7 +638,6 @@
         <div class="container">
             <h2 class="section-title">Познайомтесь з нашими <span>експертами</span></h2>
             <div class="trainers-grid" id="trainers-container">
-                <!-- Тренери будуть додані через JavaScript -->
             </div>
             <div class="no-results" id="no-results" style="display: none;">
                 <p>На жаль, тренери, що відповідають вашим критеріям, не знайдені</p>
@@ -695,9 +694,7 @@
           </div>
       </footer>
 
-    <!-- JavaScript -->
     <script>
-        // Дані про тренерів (в реальному додатку будуть завантажені з API)
         const trainers = [
             {
                 id: 1,
@@ -797,7 +794,6 @@
             noResults.style.display = 'none';
             
             trainersData.forEach(trainer => {
-                // Переклад спеціалізації
                 let specializationText = '';
                 switch(trainer.specialization) {
                     case 'strength':
@@ -819,7 +815,6 @@
                         specializationText = 'Універсальний тренер';
                 }
                 
-                // Генерація зірок для рейтингу
                 let starsHTML = '';
                 for (let i = 1; i <= 5; i++) {
                     if (i <= Math.floor(trainer.rating)) {
@@ -851,15 +846,13 @@
                 `;
                 
                 container.appendChild(trainerCard);
-                
-                // Додаємо невелику затримку для анімації
+
                 setTimeout(() => {
                     trainerCard.classList.add('visible');
                 }, 100 * container.children.length);
             });
         }
 
-        // Фільтрація тренерів
         function filterTrainers() {
             const specializationFilter = document.getElementById('specialization').value;
             const experienceFilter = document.getElementById('experience').value;
@@ -868,14 +861,12 @@
             
             let filteredTrainers = [...trainers];
             
-            // Фільтр за спеціалізацією
             if (specializationFilter) {
                 filteredTrainers = filteredTrainers.filter(trainer => 
                     trainer.specialization === specializationFilter
                 );
             }
             
-            // Фільтр за досвідом
             if (experienceFilter) {
                 const [min, max] = experienceFilter.split('-');
                 if (max) {
@@ -884,7 +875,6 @@
                         parseInt(trainer.experience) < parseInt(max)
                     );
                 } else {
-                    // Для варіанту "5+"
                     const minExperience = parseInt(min);
                     filteredTrainers = filteredTrainers.filter(trainer => 
                         parseInt(trainer.experience) >= minExperience
@@ -892,15 +882,13 @@
                 }
             }
             
-            // Фільтр за рейтингом
             if (ratingFilter) {
                 const minRating = parseFloat(ratingFilter);
                 filteredTrainers = filteredTrainers.filter(trainer => 
                     trainer.rating >= minRating
                 );
             }
-            
-            // Сортування
+
             switch (sortBy) {
                 case 'rating':
                     filteredTrainers.sort((a, b) => b.rating - a.rating);
@@ -916,7 +904,6 @@
             displayTrainers(filteredTrainers);
         }
 
-        // Запуск фільтрації при зміні будь-якого фільтра
         document.getElementById('specialization').addEventListener('change', filterTrainers);
         document.getElementById('experience').addEventListener('change', filterTrainers);
         document.getElementById('rating').addEventListener('change', filterTrainers);
@@ -924,7 +911,6 @@
         
         // Відображення всіх тренерів при завантаженні сторінки
         window.addEventListener('load', () => {
-            // Сортуємо спочатку за рейтингом за замовчуванням
             trainers.sort((a, b) => b.rating - a.rating);
             displayTrainers(trainers);
         });
@@ -943,7 +929,6 @@
             window.location.href = 'register.html';
         });
 
-        // Решта коду для ефектів та інших функцій залишається
         document.addEventListener('DOMContentLoaded', function() {
             const fadeElements = document.querySelectorAll('.fade-in');
             
@@ -959,7 +944,7 @@
             }
             
             window.addEventListener('scroll', checkFade);
-            checkFade(); // Перевірка при завантаженні
+            checkFade();
         });
 
         // Кнопки запису на тренування

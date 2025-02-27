@@ -839,7 +839,6 @@
             if (contactForm) {
                 contactForm.addEventListener('submit', function(e) {
                     e.preventDefault();
-                    // Тут буде код для відправки форми
                     alert('Дякуємо за ваше повідомлення! Ми зв\'яжемося з вами найближчим часом.');
                     contactForm.reset();
                 });
@@ -860,7 +859,6 @@
             window.location.href = 'register.html';
         });
 
-        // Решта коду для ефектів та інших функцій залишається
         document.addEventListener('DOMContentLoaded', function() {
             const fadeElements = document.querySelectorAll('.fade-in');
             
@@ -876,7 +874,7 @@
             }
             
             window.addEventListener('scroll', checkFade);
-            checkFade(); // Перевірка при завантаженні
+            checkFade();
         });
 
         // Кнопки запису на тренування

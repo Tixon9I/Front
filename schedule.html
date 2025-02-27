@@ -743,29 +743,17 @@
                     }
                 });
             }
-            
-            // Початкова перевірка
             checkFade();
-            
-            // Перевірка при прокрутці
             window.addEventListener('scroll', checkFade);
-            
-            // Перемикання вкладок розкладу
             const tabs = document.querySelectorAll('.schedule-tab');
             
             tabs.forEach(tab => {
                 tab.addEventListener('click', function() {
-                    // Видалення активного класу з усіх вкладок
                     tabs.forEach(t => t.classList.remove('active'));
-                    
-                    // Додавання активного класу вибраній вкладці
                     this.classList.add('active');
-                    
-                    // Логіка для перемикання вмісту розкладу на основі дня
                     const day = this.getAttribute('data-day');
                     console.log('Selected day:', day);
                     
-                    // Тут можна додати логіку для завантаження даних розкладу для вибраного дня
                 });
             });
         });
@@ -784,7 +772,6 @@
             window.location.href = 'register.html';
         });
 
-        // Решта коду для ефектів та інших функцій залишається
         document.addEventListener('DOMContentLoaded', function() {
             const fadeElements = document.querySelectorAll('.fade-in');
             
@@ -800,7 +787,7 @@
             }
             
             window.addEventListener('scroll', checkFade);
-            checkFade(); // Перевірка при завантаженні
+            checkFade();
         });
 
         // Кнопки запису на тренування

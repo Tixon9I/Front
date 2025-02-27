@@ -185,7 +185,6 @@
     </div>
 
     <script>
-        // JavaScript для форми входу
         document.addEventListener('DOMContentLoaded', function() {
             const loginForm = document.querySelector('.auth-form');
             
@@ -194,16 +193,7 @@
                 
                 const email = document.getElementById('loginEmail').value;
                 const password = document.getElementById('loginPassword').value;
-                
-                // Тут можна додати валідацію форми
-                
-                // Імітація відправки форми на сервер
                 console.log('Спроба входу:', { email, password });
-                
-                // Перенаправлення на головну сторінку після успішної авторизації
-                // window.location.href = 'index.html';
-                
-                // Або показати повідомлення про успішний вхід
                 alert('Авторизація успішна!');
             });
         });
