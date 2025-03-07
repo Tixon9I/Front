@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Запис на тренування | FitnessOnlineClub</title>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"> -->
+    <!-- <link rel="stylesheet" href="booking-style.css"> -->
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="navbar">
+              <a href="../page-index/index.html" class="logo"><span>Fitness</span>OnlineClub</a>
+                <div class="nav-links">
+                    <a href="../page-index/index.html">Головна</a>
+                    <a href="../page-about/about.html">Про нас</a>
+                    <a href="../page-trainers/trainers.html">Тренери</a>
+                    <a href="../page-booking/booking.html" class="active">Запис на тренування</a>
+                    <a href="../page-schedule/schedule.html">Розклад</a>
+                    <a href="../page-contacts/contacts.html">Контакти</a>
+                </div>
+                <div class="auth-buttons">
+                  <button class="btn btn-outlined" id="loginBtn"><i class="fas fa-user"></i> Увійти</button>
+                  <button class="btn btn-filled" id="registerBtn"><i class="fas fa-user-plus"></i> Реєстрація</button>
+              </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Героїчний блок -->
+    <section class="hero">
+      <div class="container">
+          <div class="hero-content">
+              <h1>Запис на тренування</h1>
+              <p>Заповніть форму для бронювання вашого тренування</p>
+          </div>
+      </div>
+  </section>
+
+    <main>
+        <section class="booking-section">
+            <div class="container">
+                <div class="booking-container">
+                    <div class="booking-info">
+                        <h2>Як забронювати тренування?</h2>
+                        <ul class="booking-steps">
+                            <li>
+                                <span class="step-number">1</span>
+                                <div class="step-content">
+                                    <h3>Оберіть тип тренування</h3>
+                                    <p>Виберіть бажаний тип тренування: індивідуальне, групове або спеціалізоване</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="step-number">2</span>
+                                <div class="step-content">
+                                    <h3>Оберіть тренера</h3>
+                                    <p>Виберіть тренера відповідно до ваших потреб та цілей</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="step-number">3</span>
+                                <div class="step-content">
+                                    <h3>Оберіть дату та час</h3>
+                                    <p>Виберіть зручний для вас день та час для тренування</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="step-number">4</span>
+                                <div class="step-content">
+                                    <h3>Заповніть свої дані</h3>
+                                    <p>Вкажіть свої контактні дані для підтвердження бронювання</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="step-number">5</span>
+                                <div class="step-content">
+                                    <h3>Підтвердіть бронювання</h3>
+                                    <p>Отримайте підтвердження на електронну пошту або SMS</p>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <div class="booking-benefits">
+                            <h3>Переваги онлайн-бронювання:</h3>
+                            <ul>
+                                <li>Швидке та зручне бронювання 24/7</li>
+                                <li>Миттєве підтвердження</li>
+                                <li>Можливість скасування за 24 години до тренування</li>
+                                <li>Історія всіх тренувань у вашому особистому кабінеті</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="booking-form">
+                        <h2>Форма бронювання</h2>
+                        <form id="training-booking-form">
+                            <div class="form-group">
+                                <label for="training-type">Тип тренування*</label>
+                                <select id="training-type" required>
+                                    <option value="">Оберіть тип тренування</option>
+                                    <option value="individual">Індивідуальне тренування</option>
+                                    <option value="group">Групове заняття</option>
+                                    <option value="yoga">Йога</option>
+                                    <option value="pilates">Пілатес</option>
+                                    <option value="functional">Функціональний тренінг</option>
+                                    <option value="crossfit">Кросфіт</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="trainer">Тренер*</label>
+                                <select id="trainer" required>
+                                    <option value="">Оберіть тренера</option>
+                                    <option value="1">Анна Ковальчук - Йога, Пілатес</option>
+                                    <option value="2">Максим Петренко - Функціональний тренінг, Силові тренування</option>
+                                    <option value="3">Ольга Шевченко - Йога, Стретчинг</option>
+                                    <option value="4">Сергій Бондаренко - Кросфіт, Силові тренування</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="booking-date">Дата*</label>
+                                    <input type="date" id="booking-date" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="booking-time">Час*</label>
+                                    <select id="booking-time" required>
+                                        <option value="">Оберіть час</option>
+                                        <option value="07:00">07:00</option>
+                                        <option value="08:00">08:00</option>
+                                        <option value="09:00">09:00</option>
+                                        <option value="10:00">10:00</option>
+                                        <option value="11:00">11:00</option>
+                                        <option value="12:00">12:00</option>
+                                        <option value="13:00">13:00</option>
+                                        <option value="14:00">14:00</option>
+                                        <option value="15:00">15:00</option>
+                                        <option value="16:00">16:00</option>
+                                        <option value="17:00">17:00</option>
+                                        <option value="18:00">18:00</option>
+                                        <option value="19:00">19:00</option>
+                                        <option value="20:00">20:00</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="full-name">Повне ім'я*</label>
+                                <input type="text" id="full-name" placeholder="Введіть ваше повне ім'я" required>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="phone">Телефон*</label>
+                                    <input type="tel" id="phone" placeholder="+380 (XX) XXX-XX-XX" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="email">Email*</label>
+                                    <input type="email" id="email" placeholder="ваш@email.com" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="notes">Додаткова інформація</label>
+                                <textarea id="notes" placeholder="Вкажіть будь-яку важливу інформацію для тренера (рівень підготовки, травми, обмеження тощо)"></textarea>
+                            </div>
+                            
+                            <div class="form-group checkbox">
+                                <input type="checkbox" id="terms" required>
+                                <label for="terms">Я погоджуюсь з <a href="#">умовами та правилами клубу</a></label>
+                            </div>
+                            
+                            <button type="submit" class="form-submit">Забронювати тренування</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Підвал -->
+    <footer>
+      <div class="container">
+          <div class="footer-content">
+              <div class="footer-column">
+                  <h3>FitnessOnlineClub</h3>
+                  <p>Ваш надійний партнер на шляху до здорового та активного способу життя. Ми допомагаємо клієнтам досягати їхніх фітнес-цілей з 2010 року.</p>
+                  <div class="social-links">
+                      <a href="#"><i class="fab fa-facebook-f"></i></a>
+                      <a href="#"><i class="fab fa-instagram"></i></a>
+                      <a href="#"><i class="fab fa-telegram"></i></a>
+                      <a href="#"><i class="fab fa-youtube"></i></a>
+                  </div>
+              </div>
+              <div class="footer-column">
+                  <h3>Навігація</h3>
+                  <div class="footer-links">
+                      <a href="../page-index/index.html">Головна</a>
+                      <a href="../page-about/about.html">Про нас</a>
+                      <a href="../page-trainers/trainers.html">Тренери</a>
+                      <a href="../page-booking/booking.html">Запис на тренування</a>
+                      <a href="../page-schedule/schedule.html">Розклад</a>
+                      <a href="../page-contacts/contacts.html">Контакти</a>
+                  </div>
+              </div>
+              <div class="footer-column">
+                  <h3>Контакти</h3>
+                  <p><i class="fas fa-map-marker-alt"></i> вул. Спортивна, 42, м. Київ</p>
+                  <p><i class="fas fa-phone"></i> +380 (50) 123-45-67</p>
+                  <p><i class="fas fa-envelope"></i> info@fitnessonlineclub.ua</p>
+                  <p><i class="fas fa-clock"></i> Щодня: 6:00 - 23:00</p>
+              </div>
+              <div class="footer-column">
+                  <h3>Підписка</h3>
+                  <p>Підпишіться на нашу розсилку, щоб отримувати новини та спеціальні пропозиції</p>
+                  <form class="footer-form">
+                      <div class="form-group">
+                          <input type="email" placeholder="Ваш email" required>
+                      </div>
+                      <button type="submit" class="form-submit">Підписатися</button>
+                  </form>
+                  </div>
+              </div>
+              <div class="copyright">
+                  <p>&copy; 2025 FitnessOnlineClub. Усі права захищені.</p>
+              </div>
+          </div>
+      </footer>
+
+    <script src="booking-script.js"></script>
+</body>
+</html>
