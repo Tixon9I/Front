@@ -6,7 +6,7 @@ const trainers = [
         experience: '7',
         rating: 4.8,
         description: 'Сертифікований тренер з силових тренувань з 7-річним досвідом. Спеціалізується на програмах набору мязової маси та силового тренінгу.',
-        image: "page-trainers/images/1.jpg"
+        image: "images/1.jpg"
     },
     {
         id: 2,
@@ -15,7 +15,7 @@ const trainers = [
         experience: '5',
         rating: 5.0,
         description: 'Інструктор з йоги, має сертифікати міжнародного зразка. Проводить заняття для початківців та просунутих рівнів.',
-        image: "page-trainers/images/2.jpg"
+        image: "images/2.jpg"
     },
     {
         id: 3,
@@ -24,7 +24,7 @@ const trainers = [
         experience: '4',
         rating: 4.6,
         description: 'Професійний тренер з кросфіту, учасник національних змагань. Допоможе досягти нових вершин у фізичній підготовці.',
-        image: "page-trainers/images/3.jpg"
+        image: "images/3.jpg"
     },
     {
         id: 4,
@@ -33,7 +33,7 @@ const trainers = [
         experience: '6',
         rating: 4.9,
         description: 'Тренер з пілатесу, фахівець з реабілітації. Допомагає клієнтам відновитися після травм та покращити гнучкість.',
-        image: "page-trainers/images/4.jpg"
+        image: "images/4.jpg"
     },
     {
         id: 5,
@@ -42,7 +42,7 @@ const trainers = [
         experience: '3',
         rating: 4.7,
         description: 'Інструктор з кардіотренувань. Розробляє індивідуальні програми для схуднення та підвищення витривалості.',
-        image: "page-trainers/images/5.jpg"
+        image: "images/5.jpg"
     },
     {
       id: 6,
@@ -51,7 +51,7 @@ const trainers = [
         experience: '8',
         rating: 4.9,
         description: 'Майстер йоги з 8-річним досвідом. Спеціалізується на хатха та кундаліні йозі. Допомагає клієнтам знайти внутрішню гармонію.',
-        image: "page-trainers/images/6.jpg"
+        image: "images/6.jpg"
     },
     {
         id: 7,
@@ -60,7 +60,7 @@ const trainers = [
         experience: '10',
         rating: 4.8,
         description: 'Досвідчений тренер з силових тренувань. Колишній професійний спортсмен, допомагає клієнтам безпечно досягати своїх фітнес-цілей.',
-        image: "page-trainers/images/7.jpg"
+        image: "images/7.jpg"
     },
     {
         id: 8,
@@ -69,7 +69,7 @@ const trainers = [
         experience: '4',
         rating: 4.5,
         description: 'Сертифікований інструктор з пілатесу. Фокусується на поставі та зміцненні кору, підходить для клієнтів різного рівня підготовки.',
-        image: "page-trainers/images/8.jpg"
+        image: "images/8.jpg"
     },
     {
         id: 9,
@@ -78,7 +78,7 @@ const trainers = [
         experience: '6',
         rating: 4.7,
         description: 'Фахівець з кардіотренувань та інтервального тренінгу. Допомагає клієнтам покращити серцево-судинну систему та скинути вагу.',
-        image: "page-trainers/images/9.jpg"
+        image: "images/9.jpg"
     }
 ];
 
