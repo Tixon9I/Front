@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Панель адміністратора | FitnessOnlineClub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="admin-style.css">
+</head>
+<body>
+    <!-- Хедер -->
+    <header>
+        <div class="container header-container">
+            <a href="../../page-index/index.html" class="logo"><span>Fitness</span>OnlineClub</a>
+            <div class="user-menu">
+                <div class="user-info">
+                    <div class="user-avatar" id="avatar">A</div>
+                    <div class="user-name">Адміністратор</div>
+                    <i class="fas fa-chevron-down dropdown-toggle"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основний контент -->
+    <div class="container dashboard-container">
+        <!-- Бічне меню -->
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li class="sidebar-menu-item">
+                    <a href="#" class="sidebar-menu-link active" data-section="dashboard-stats">
+                        <i class="fas fa-tachometer-alt"></i>
+                        Головна
+                    </a>
+                </li>
+                <li class="sidebar-menu-item">
+                    <a href="#" class="sidebar-menu-link" data-section="workouts-management-section">
+                        <i class="fas fa-dumbbell"></i>
+                        Управління тренуваннями
+                    </a>
+                </li>
+                <li class="sidebar-menu-item">
+                    <a href="#" class="sidebar-menu-link" data-section="users-management-section">
+                        <i class="fas fa-users"></i>
+                        Управління користувачами
+                    </a>
+                </li>
+                <div class="sidebar-menu-divider"></div>
+                <li class="sidebar-menu-item">
+                    <a href="#" class="sidebar-menu-link">
+                        <i class="fas fa-cog"></i>
+                        Налаштування
+                    </a>
+                </li>
+                <li class="sidebar-menu-item">
+                    <a href="#" class="sidebar-menu-link" id="logoutLinkSidebar">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Вийти
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Головний контент -->
+        <div class="main-content">
+            <div>
+                <h1 class="page-title">Панель адміністратора</h1>
+                
+                <!-- Статистика -->
+                <div class="dashboard-stats" id="dashboard-stats">
+                    <div class="stat-card">
+                        <span class="stat-card-title">Активних користувачів</span>
+                        <div class="stat-card-value" id="activeUsers">0</div>
+                        <span class="stat-card-info" id="activeUsersChange"></span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-card-title">Записів на тренування</span>
+                        <div class="stat-card-value" id="bookingsNextWeek">0</div>
+                        <span class="stat-card-info">на наступний тиждень</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-card-title">Активних абонементів</span>
+                        <div class="stat-card-value" id="activeSubscriptions">0</div>
+                        <span class="stat-card-info" id="subscriptionsPercentage"></span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-card-title">Тренувань сьогодні</span>
+                        <div class="stat-card-value" id="workoutsToday">0</div>
+                        <span class="stat-card-info" id="workoutsTodayChange"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-content">
+                <!-- Управління записами на тренування -->
+                <div class="content-card" id="workouts-management-section">
+                    <div class="content-card-header">
+                        <h2 class="content-card-title">Управління записами на тренування</h2>
+                        <a href="#" class="content-card-action view-all-bookings">Історія записів</a>
+                    </div>
+                    
+                    <!-- Фільтри та пошук -->
+                    <div class="filters-container">
+                        <div class="filter-item">
+                            <label class="filter-label">Тренування:</label>
+                            <select class="filter-select" id="workoutTypeFilter">
+                                <option value="all">Всі типи</option>
+                                <option value="yoga">Йога</option>
+                                <option value="fitness">Фітнес</option>
+                                <option value="pilates">Пілатес</option>
+                                <option value="crossfit">Кросфіт</option>
+                            </select>
+                        </div>
+                        <div class="filter-item">
+                            <label class="filter-label">Дата:</label>
+                            <select class="filter-select" id="dateFilter">
+                                <option value="all">Всі дати</option>
+                                <option value="today">Сьогодні</option>
+                                <option value="tomorrow">Завтра</option>
+                                <option value="week">Цей тиждень</option>
+                                <option value="month">Цей місяць</option>
+                            </select>
+                        </div>
+                        <div class="filter-item">
+                            <label class="filter-label">Статус:</label>
+                            <select class="filter-select" id="statusFilter">
+                                <option value="all">Всі статуси</option>
+                                <option value="confirmed">Підтверджені</option>
+                                <option value="pending">Очікує</option>
+                                <option value="canceled">Скасовані</option>
+                            </select>
+                        </div>
+                        <input type="text" class="search-input" id="searchWorkoutInput" placeholder="Пошук клієнта...">
+                        <button class="filter-button" id="applyWorkoutFilters">Застосувати</button>
+                    </div>
+                    
+                    <!-- Таблиця записів на тренування -->
+                    <table class="workouts-management">
+                        <thead>
+                            <tr>
+                                <th>Клієнт</th>
+                                <th>Тренування</th>
+                                <th>Дата і час</th>
+                                <th>Тренер</th>
+                                <th>Статус</th>
+                                <th>Дії</th>
+                            </tr>
+                        </thead>
+                        <tbody id="workoutsTableBody">
+                        </tbody>
+                    </table>
+                    
+                    <!-- Пагінація -->
+                    <div class="pagination" id="workoutsPagination">
+                    </div>
+                </div>
+
+                <!-- Управління обліковими записами користувачів -->
+                <div class="content-card" id="users-management-section">
+                    <div class="content-card-header">
+                        <h2 class="content-card-title">Управління обліковими записами</h2>
+                        <a href="#" class="content-card-action export-users">Експорт даних</a>
+                    </div>
+                    
+                    <!-- Фільтри та пошук -->
+                    <div class="filters-container">
+                        <div class="filter-item">
+                            <label class="filter-label">Роль:</label>
+                            <select class="filter-select" id="roleFilter">
+                                <option value="all">Всі ролі</option>
+                                <option value="client">Клієнти</option>
+                                <option value="trainer">Тренери</option>
+                                <option value="admin">Адміністратори</option>
+                            </select>
+                        </div>
+                        <div class="filter-item">
+                            <label class="filter-label">Статус:</label>
+                            <select class="filter-select" id="userStatusFilter">
+                                <option value="all">Всі статуси</option>
+                                <option value="active">Активні</option>
+                                <option value="inactive">Неактивні</option>
+                            </select>
+                        </div>
+                        <div class="filter-item">
+                            <label class="form-label">Сортування:</label>
+                            <select class="filter-select" id="sortFilter">
+                                <option value="name">За ім'ям</option>
+                                <option value="date">За датою реєстрації</option>
+                                <option value="activity">За активністю</option>
+                            </select>
+                        </div>
+                        <input type="text" class="search-input" id="searchUserInput" placeholder="Пошук користувача...">
+                        <button class="filter-button" id="applyUserFilters">Застосувати</button>
+                    </div>
+                    
+                    <!-- Таблиця користувачів -->
+                    <table class="users-management">
+                        <thead>
+                            <tr>
+                                <th>Користувач</th>
+                                <th>Роль</th>
+                                <th>Email</th>
+                                <th>Дата реєстрації</th>
+                                <th>Статус</th>
+                                <th>Дії</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody">
+                        </tbody>
+                    </table>
+                    
+                    <!-- Пагінація -->
+                    <div class="pagination" id="usersPagination">
+                    </div>
+                </div>
+
+                <!-- Модальне вікно для редагування користувача -->
+                <div id="userModal" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title">Редагувати користувача</h3>
+                            <button class="close-button user-close-button">×</button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="userForm">
+                                <input type="hidden" id="userId">
+                                <div class="form-group">
+                                    <label class="form-label">Ім'я та прізвище</label>
+                                    <input type="text" class="form-input" id="userName" placeholder="Введіть ім'я та прізвище" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" class="form-input" id="userEmail" placeholder="Введіть email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Телефон</label>
+                                    <input type="tel" class="form-input" id="userPhone" placeholder="Введіть номер телефону" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Роль</label>
+                                    <select class="form-select" id="userRole" required>
+                                        <option value="client">Клієнт</option>
+                                        <option value="trainer">Тренер</option>
+                                        <option value="admin">Адміністратор</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Статус</label>
+                                    <select class="form-select" id="userStatus" required>
+                                        <option value="active">Активний</option>
+                                        <option value="inactive">Неактивний</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Додаткова інформація</label>
+                                    <textarea class="form-textarea" id="userNotes" placeholder="Додаткова інформація про користувача"></textarea>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="cancel-button user-cancel-button">Скасувати</button>
+                            <button class="save-button user-save-button">Зберегти</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Модальне вікно для підтвердження видалення -->
+                <div id="confirmDeleteModal" class="modal">
+                    <div class="modal-content" style="max-width: 400px;">
+                        <div class="modal-header">
+                            <h3 class="modal-title">Підтвердження видалення</h3>
+                            <button class="close-button confirm-close-button">×</button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Ви дійсно хочете видалити цього користувача? Цю дію неможливо скасувати.</p>
+                            <input type="hidden" id="deleteUserId" value="">
+                        </div>
+                        <div class="modal-footer">
+                            <button class="cancel-button confirm-cancel-button">Скасувати</button>
+                            <button class="delete-button confirm-delete-button" style="background-color: var(--danger-color);">Видалити</button>
+                        </div>
+                    </div>
+                </div>
+              
+                <!-- Модальне вікно для редагування запису -->
+                <div id="workoutModal" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title">Редагувати запис на тренування</h3>
+                            <button class="close-button workout-close-button">×</button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="workoutForm">
+                                <input type="hidden" id="workoutId">
+                                <div class="form-group">
+                                    <label class="form-label">Клієнт</label>
+                                    <select class="form-select" id="workoutClient" required>
+                                        <option value="">Оберіть клієнта</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Тип тренування</label>
+                                    <select class="form-select" id="workoutType" required>
+                                        <option value="">Оберіть тип тренування</option>
+                                        <option value="yoga">Йога</option>
+                                        <option value="fitness">Фітнес</option>
+                                        <option value="pilates">Пілатес</option>
+                                        <option value="crossfit">Кросфіт</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Дата</label>
+                                    <input type="date" class="form-input" id="workoutDate" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Час</label>
+                                    <input type="time" class="form-input" id="workoutTime" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Тренер</label>
+                                    <select class="form-select" id="workoutTrainer" required>
+                                        <option value="">Оберіть тренера</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Статус</label>
+                                    <select class="form-select" id="workoutStatus" required>
+                                        <option value="pending">Очікує</option>
+                                        <option value="confirmed">Підтверджено</option>
+                                        <option value="canceled">Скасовані</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Примітки</label>
+                                    <textarea class="form-textarea" id="workoutNotes"></textarea>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="cancel-button workout-cancel-button">Скасувати</button>
+                            <button class="save-button workout-save-button">Зберегти</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="admin_script.js"></script>
+</body>
+</html>

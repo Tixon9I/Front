@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Розклад тренувань | FitnessOnlineClub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="schedule-style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="navbar" id="navbar">
+              <a href="../page-index/index.html" class="logo"><span>Fitness</span>OnlineClub</a>
+              <ul class="nav-links">
+                  <li><a href="../page-index/index.html">Головна</a></li>
+                  <li><a href="../page-about/about.html">Про нас</a></li>
+                  <li><a href="../page-trainers/trainers.html">Тренери</a></li>
+                  <li><a href="../page-booking/booking.html">Запис на тренування</a></li>
+                  <li><a href="../page-schedule/schedule.html" class="active">Розклад</a></li>
+                  <li><a href="../page-contacts/contacts.html">Контакти</a></li>
+              </ul>
+              <div class="auth-buttons" id="authButtons">
+                <button class="btn btn-outlined" id="loginBtn"><i class="fas fa-user"></i> Увійти</button>
+                <button class="btn btn-filled" id="registerBtn"><i class="fas fa-user-plus"></i> Реєстрація</button>
+            </div>
+            <div class="user-menu" id="userMenu" style="display: none;">
+                <div class="avatar" id="avatar"></div>
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <a href="#" id="profileLink">Профіль</a>
+                    <a href="#" id="logoutLink">Вийти з профілю</a>
+                </div>
+            </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+      <div class="container">
+          <div class="hero-content">
+              <h1>Розклад тренувань</h1>
+              <p>Знайдіть зручний час для тренувань у нашому клубі</p>
+          </div>
+      </div>
+    </section>
+
+    <main>
+        <section class="schedule-section">
+            <div class="container">
+                <div class="schedule-filters fade-in">
+                    <div class="filter-group">
+                        <label for="training-type">Тип тренування:</label>
+                        <select id="training-type">
+                            <option value="all">Всі тренування</option>
+                            <option value="Йога">Йога</option>
+                            <option value="Кросфіт">Кросфіт</option>
+                            <option value="Пілатес">Пілатес</option>
+                            <option value="Кросфіт">Кросфіт</option>
+                            <option value="Силові тренування">Силове тренування</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="trainer">Тренер:</label>
+                        <select id="trainer">
+                            <option value="all">Всі тренери</option>
+                            <option value="Анна Ковальчук">Анна Ковальчук</option>
+                            <option value="Максим Петренко">Максим Петренко</option>
+                            <option value="Ольга Шевченко">Ольга Шевченко</option>
+                            <option value="Сергій Бондаренко">Сергій Бондаренко</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="date">Дата:</label>
+                        <input type="date" id="date">
+                    </div>
+                    <button class="btn btn-filled" id="apply-filters">Застосувати фільтри</button>
+                    <button class="btn btn-outlined" id="reset-filters">Скинути фільтри</button>
+                </div>
+                
+                <div class="schedule-tabs fade-in">
+                    <div class="schedule-tab active" data-day="monday">Понеділок</div>
+                    <div class="schedule-tab" data-day="tuesday">Вівторок</div>
+                    <div class="schedule-tab" data-day="wednesday">Середа</div>
+                    <div class="schedule-tab" data-day="thursday">Четвер</div>
+                    <div class="schedule-tab" data-day="friday">П'ятниця</div>
+                    <div class="schedule-tab" data-day="saturday">Субота</div>
+                    <div class="schedule-tab" data-day="sunday">Неділя</div>
+                </div>
+                
+                <div class="schedule-content fade-in">
+                  <table class="schedule-table">
+                    <thead>
+                      <tr>
+                        <th>Час</th>
+                        <th>Тренування</th>
+                        <th>Тренер</th>
+                        <th>Тривалість</th>
+                        <th>Місце</th>
+                        <th>Дії</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr data-training-type="Ранкова йога" data-trainer="Ольга Шевченко">
+                        <td>07:00</td>
+                        <td>Ранкова йога</td>
+                        <td>Ольга Шевченко</td>
+                        <td>60 хв</td>
+                        <td>Зал №2</td>
+                        <td>
+                          <button
+                            class="btn btn-filled btn-small book-training"
+                            data-training-type="Ранкова йога"
+                            data-time="07:00"
+                            data-trainer="Ольга Шевченко"
+                          >
+                            Записатись
+                          </button>
+                        </td>
+                      </tr>
+                      <tr data-training-type="Функціональний тренінг" data-trainer="Максим Петренко">
+                        <td>09:00</td>
+                        <td>Функціональний тренінг</td>
+                        <td>Максим Петренко</td>
+                        <td>45 хв</td>
+                        <td>Зал №1</td>
+                        <td>
+                          <button
+                            class="btn btn-filled btn-small book-training"
+                            data-training-type="Функціональний тренінг"
+                            data-time="09:00"
+                            data-trainer="Максим Петренко"
+                          >
+                            Записатись
+                          </button>
+                        </td>
+                      </tr>
+                      <tr data-training-type="Пілатес" data-trainer="Анна Ковальчук">
+                        <td>11:00</td>
+                        <td>Пілатес</td>
+                        <td>Анна Ковальчук</td>
+                        <td>60 хв</td>
+                        <td>Зал №3</td>
+                        <td>
+                          <button
+                            class="btn btn-filled btn-small book-training"
+                            data-training-type="Пілатес"
+                            data-time="11:00"
+                            data-trainer="Анна Ковальчук"
+                          >
+                            Записатись
+                          </button>
+                        </td>
+                      </tr>
+                      <tr data-training-type="Кросфіт" data-trainer="Сергій Бондаренко">
+                        <td>13:30</td>
+                        <td>Кросфіт</td>
+                        <td>Сергій Бондаренко</td>
+                        <td>45 хв</td>
+                        <td>Зал №1</td>
+                        <td>
+                          <button
+                            class="btn btn-filled btn-small book-training"
+                            data-training-type="Кросфіт"
+                            data-time="13:30"
+                            data-trainer="Сергій Бондаренко"
+                          >
+                            Записатись
+                          </button>
+                        </td>
+                      </tr>
+                      <tr data-training-type="Зумба" data-trainer="Анна Ковальчук">
+                        <td>16:00</td>
+                        <td>Зумба</td>
+                        <td>Анна Ковальчук</td>
+                        <td>60 хв</td>
+                        <td>Зал №2</td>
+                        <td>
+                          <button
+                            class="btn btn-filled btn-small book-training"
+                            data-training-type="Зумба"
+                            data-time="16:00"
+                            data-trainer="Анна Ковальчук"
+                          >
+                            Записатись
+                          </button>
+                        </td>
+                      </tr>
+                      <tr data-training-type="Силове тренування" data-trainer="Максим Петренко">
+                        <td>18:00</td>
+                        <td>Силове тренування</td>
+                        <td>Максим Петренко</td>
+                        <td>50 хв</td>
+                        <td>Зал №1</td>
+                        <td>
+                          <button
+                            class="btn btn-filled btn-small book-training"
+                            data-training-type="Силове тренування"
+                            data-time="18:00"
+                            data-trainer="Максим Петренко"
+                          >
+                            Записатись
+                          </button>
+                        </td>
+                      </tr>
+                      <tr data-training-type="Стретчинг" data-trainer="Ольга Шевченко">
+                        <td>19:30</td>
+                        <td>Стретчинг</td>
+                        <td>Ольга Шевченко</td>
+                        <td>45 хв</td>
+                        <td>Зал №3</td>
+                        <td>
+                          <button
+                            class="btn btn-filled btn-small book-training"
+                            data-training-type="Стретчинг"
+                            data-time="19:30"
+                            data-trainer="Ольга Шевченко"
+                          >
+                            Записатись
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+      <div class="container">
+          <div class="footer-content">
+              <div class="footer-column">
+                  <h3>FitnessOnlineClub</h3>
+                  <p>Ваш надійний партнер на шляху до здорового та активного способу життя. Ми допомагаємо клієнтам досягати їхніх фітнес-цілей з 2010 року.</p>
+                  <div class="social-links">
+                      <a href="#"><i class="fab fa-facebook-f"></i></a>
+                      <a href="#"><i class="fab fa-instagram"></i></a>
+                      <a href="#"><i class="fab fa-telegram"></i></a>
+                      <a href="#"><i class="fab fa-youtube"></i></a>
+                  </div>
+              </div>
+              <div class="footer-column">
+                  <h3>Навігація</h3>
+                  <div class="footer-links">
+                      <a href="../page-index/index.html">Головна</a>
+                      <a href="../page-about/about.html">Про нас</a>
+                      <a href="../page-trainers/trainers.html">Тренери</a>
+                      <a href="../page-booking/booking.html">Запис на тренування</a>
+                      <a href="../page-schedule/schedule.html">Розклад</a>
+                      <a href="../page-contacts/contacts.html">Контакти</a>
+                  </div>
+              </div>
+              <div class="footer-column">
+                  <h3>Контакти</h3>
+                  <p><i class="fas fa-map-marker-alt"></i> вул. Спортивна, 42, м. Київ</p>
+                  <p><i class="fas fa-phone"></i> +380 (50) 123-45-67</p>
+                  <p><i class="fas fa-envelope"></i> info@fitnessonlineclub.ua</p>
+                  <p><i class="fas fa-clock"></i> Щодня: 6:00 - 23:00</p>
+              </div>
+              <div class="footer-column">
+                <h3>Підписка</h3>
+                <p>Підпишіться на нашу розсилку, щоб отримувати новини та спеціальні пропозиції</p>
+                <form class="footer-form">
+                    <div class="form-group" id="subscribeForm">
+                        <input type="email" id="subscribeEmail" placeholder="Ваш email" required>
+                    </div>
+                    <button type="submit" class="form-submit">Підписатися</button>
+                </form>
+              </div>
+          </div>
+          <div class="copyright">
+              <p>© 2025 FitnessOnlineClub. Усі права захищені.</p>
+          </div>
+      </div>
+    </footer>
+
+    <script type="module" src="schedule-script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>

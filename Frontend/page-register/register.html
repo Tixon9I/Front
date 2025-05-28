@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Реєстрація | FitnessOnlineClub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="register-style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <a href="../page-index/index.html" class="logo"><span>Fitness</span>OnlineClub</a>
+        </div>
+        <div class="auth-card">
+            <form class="auth-form" id="registerForm">
+                <h2>Створення акаунта</h2>
+                
+                <div class="form-group">
+                    <label for="registerName">ПІБ</label>
+                    <input type="text" id="registerName" placeholder="Введіть ваше повне ім'я" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" placeholder="Введіть ваш email" required>
+                </div>
+                
+                <div class="form-group">
+                  <label for="registerPhone">Телефон</label>
+                  <input type="tel" id="registerPhone" value="+380 " placeholder="(XX) XXX-XX-XX" required>
+                  <small id="phoneError" class="error-message"></small>
+              </div>
+                
+                <div class="form-group">
+                    <label>Оберіть роль</label>
+                    <div class="role-selector">
+                        <div class="role-option active" data-role="client">
+                            <i class="fas fa-user"></i>
+                            <span>Клієнт</span>
+                        </div>
+                        <div class="role-option" data-role="coach">
+                            <i class="fas fa-dumbbell"></i>
+                            <span>Тренер</span>
+                        </div>
+                        <div class="role-option" data-role="admin">
+                            <i class="fas fa-user-shield"></i>
+                            <span>Адміністратор</span>
+                        </div>
+                    </div>
+                    <input type="hidden" id="userRole" value="client">
+                </div>
+                
+                <!-- Додаткові поля для тренера -->
+                <div class="coach-fields">
+                    <div class="form-group">
+                        <label for="coachSpecialization">Спеціалізація</label>
+                        <select id="coachSpecialization">
+                            <option value="">Оберіть спеціалізацію</option>
+                            <option value="Йога">Йога</option>
+                            <option value="Пілатес">Пілатес</option>
+                            <option value="Силові тренування">Силові тренування</option>
+                            <option value="Кардіо">Кардіо</option>
+                            <option value="Кросфіт">Кросфіт</option>
+                        </select>
+                        <small id="coachSpecializationError" class="error-message"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="coachExperience">Досвід роботи (роки)</label>
+                        <input type="number" id="coachExperience" min="0" placeholder="Скільки років досвіду">
+                        <small id="coachExperienceError" class="error-message"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="coachCertificates">Сертифікати</label>
+                        <input type="text" id="coachCertificates" placeholder="Вкажіть ваші сертифікати">
+                    </div>
+                </div>
+                
+                <!-- Додаткові поля для адміністратора -->
+                <div class="admin-fields">
+                    <div class="form-group">
+                      <label for="adminPosition">Посада</label>
+                      <select id="adminPosition">
+                          <option value="">Оберіть посаду</option>
+                          <option value="manager">Менеджер клубу</option>
+                          <option value="senior_manager">Старший менеджер</option>
+                          <option value="receptionist">Адміністратор рецепції</option>
+                          <option value="technical_support">Технічна підтримка</option>
+                      </select>
+                      <small id="adminPositionError" class="error-message"></small>
+                  </div>
+                    <div class="form-group security-code">
+                        <label for="securityCode">Код безпеки</label>
+                        <input type="text" id="securityCode" placeholder="Введіть код безпеки для адміністратора">
+                        <small id="securityCodeError" class="error-message"></small>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerPassword">Пароль</label>
+                    <input type="password" id="registerPassword" placeholder="Створіть пароль" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerPasswordConfirm">Підтвердження пароля</label>
+                    <input type="password" id="registerPasswordConfirm" placeholder="Підтвердіть пароль" required>
+                </div>
+
+                <small id="passwordError" class="error-message"></small>
+                
+                <button type="submit" class="form-submit">Зареєструватися</button>
+                
+                <div class="form-footer">
+                    <p>Вже маєте акаунт? <a href="../page-login/login.html">Увійти</a></p>
+                </div>
+            </form>
+        </div>
+        <div style="text-align: center; margin-top: 1.5rem;">
+            <a href="../page-index/index.html" class="back-home"><i class="fas fa-arrow-left"></i> Повернутися на головну</a>
+        </div>
+    </div>
+
+    <script src="register-script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/inputmask@5.0.6/dist/inputmask.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Особистий кабінет | FitnessOnlineClub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="client-style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="../../page-index/index.html" class="logo"><span>Fitness</span>OnlineClub</a>
+            <div class="user-menu">
+                <div class="user-info" id="userInfoDisplay">
+                    <div class="user-avatar"></div>
+                    <div class="user-name"></div>
+                    <i class="fas fa-chevron-down dropdown-toggle"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="dashboard-container">
+            <!-- Бічне меню -->
+            <div class="sidebar">
+                <ul class="sidebar-menu">
+                    <li class="sidebar-menu-item">
+                        <a href="#" class="sidebar-menu-link active" data-section="dashboard">
+                            <i class="fas fa-home"></i>
+                            Головна
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="#" class="sidebar-menu-link" data-section="workouts-section">
+                            <i class="fas fa-dumbbell"></i>
+                            Мої тренування
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="#" class="sidebar-menu-link" data-section="progress-section">
+                            <i class="fas fa-chart-line"></i>
+                            Мій прогрес
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="#" class="sidebar-menu-link" data-section="feedback-section">
+                            <i class="fas fa-star"></i>
+                            Відгуки та оцінки
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="#" class="sidebar-menu-link" data-section="subscription-section">
+                            <i class="fas fa-credit-card"></i>
+                            Абонементи
+                        </a>
+                    </li>
+                    <div class="sidebar-menu-divider"></div>
+                    <li class="sidebar-menu-item">
+                        <a href="#" class="sidebar-menu-link">
+                            <i class="fas fa-cog"></i>
+                            Налаштування
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="index.html" class="sidebar-menu-link">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Вийти
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Основний контент -->
+            <div class="main-content">
+                <div id="dashboard">
+                    <h1 class="page-title">Мій кабінет</h1>
+                    
+                    <!-- Статистика -->
+                    <div class="dashboard-stats">
+                        <div class="stat-card">
+                            <div class="stat-card-title">Тренувань цього місяця</div>
+                            <div class="stat-card-value" id="trainingsThisMonth">0</div>
+                            <div class="stat-card-info" id="trainingsPlanned">0 заплановано</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card-title">Втрата ваги</div>
+                            <div class="stat-card-value" id="weightLoss">0 кг</div>
+                            <div class="stat-card-info">За останній місяць</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card-title">Спалено калорій</div>
+                            <div class="stat-card-value" id="caloriesBurned">0</div>
+                            <div class="stat-card-info">За останній місяць</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card-title">Регулярність</div>
+                            <div class="stat-card-value" id="regularity">0%</div>
+                            <div class="stat-card-info">+0% за місяць</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-content">
+                    <!-- Лівий блок -->
+                    <div>
+                        <!-- Мої тренування -->
+                        <div id="workouts-section" class="content-card">
+                            <div class="content-card-header">
+                                <h2 class="content-card-title">Мої останні тренування</h2>
+                                <a href="#" class="content-card-action view-all-workouts">Переглянути всі</a>
+                            </div>
+                            <div class="workouts-list" id="recentWorkouts">
+                                <!-- Динамічно заповнюється -->
+                            </div>
+                        </div>
+
+                        <!-- Прогрес -->
+                        <div id="progress-section" class="content-card">
+                            <div class="content-card-header">
+                                <h2 class="content-card-title">Мій прогрес</h2>
+                                <a href="#" class="content-card-action">Повний звіт</a>
+                            </div>
+                            <div class="progress-cards" id="progressCards">
+                                <!-- Динамічно заповнюється -->
+                            </div>
+                        </div>
+
+                        <!-- Відгуки та оцінки -->
+                        <div id="feedback-section" class="content-card">
+                            <div class="content-card-header">
+                                <h2 class="content-card-title">Мої відгуки та оцінки</h2>
+                                <a href="#" class="content-card-action view-all-feedback">Переглянути всі</a>
+                            </div>
+                            <div class="feedback-list" id="feedbackList">
+                                <!-- Динамічно заповнюється -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Правий блок -->
+                    <div>
+                        <!-- Найближчі тренування -->
+                        <div class="content-card">
+                            <div class="content-card-header">
+                                <h2 class="content-card-title">Найближчі тренування</h2>
+                                <a href="#" class="content-card-action view-calendar">Календар</a>
+                            </div>
+                            <div class="upcoming-workouts" id="upcomingWorkouts">
+                                <!-- Динамічно заповнюється -->
+                            </div>
+                        </div>
+
+                        <!-- Поради -->
+                        <div class="content-card">
+                            <div class="content-card-header">
+                                <h2 class="content-card-title">Персональні поради</h2>
+                            </div>
+                            <div id="personalTips">
+                                <p>Враховуючи ваш план тренувань, рекомендуємо збільшити споживання білка до 1.5г на кг ваги для кращого відновлення м'язів.</p>
+                                <p style="margin-top: 0.8rem;">Спробуйте додати більше стретчингу після тренувань, щоб покращити гнучкість і знизити ризик травм.</p>
+                            </div>
+                        </div>
+
+                        <!-- Абонементи -->
+                        <div id="subscription-section" class="content-card">
+                            <div class="content-card-header">
+                                <h2 class="content-card-title">Мій абонемент</h2>
+                                <a href="#" class="content-card-action view-all-subscriptions">Всі абонементи</a>
+                            </div>
+                            <div class="subscription-info" id="subscriptionInfo">
+                                <!-- Динамічно заповнюється -->
+                            </div>
+                            <div class="add-subscription">
+                                <button class="add-subscription-button" id="addSubscriptionButton">
+                                    <i class="fas fa-plus"></i> Додати абонемент
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="client_script.js"></script>
+</body>
+</html>

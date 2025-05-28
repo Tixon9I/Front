@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Особистий кабінет тренера | FitnessOnlineClub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="trainer-style.css">
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="../../page-index/index.html" class="logo"><span>Fitness</span>OnlineClub</a>
+            <div class="user-menu">
+                <div class="user-info" id="userInfoDisplay">
+                    <div class="user-avatar" id="userAvatar">МТ</div>
+                    <div class="user-name" id="userName">Михайло Тренер</div>
+                    <i class="fas fa-chevron-down dropdown-toggle"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="dashboard-container">
+            <!-- Бічне меню -->
+            <div class="sidebar">
+                <ul class="sidebar-menu">
+                    <li class="sidebar-menu-item">
+                        <a href="#" class="sidebar-menu-link active">
+                            <i class="fas fa-home"></i>
+                            Головна
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="#" class="sidebar-menu-link">
+                            <i class="fas fa-users"></i>
+                            Мої клієнти
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="#" class="sidebar-menu-link">
+                            <i class="fas fa-calendar-alt"></i>
+                            Розклад
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                      <a href="#" class="sidebar-menu-link">
+                          <i class="fas fa-clipboard-check"></i>
+                          Записи на тренування
+                      </a>
+                  </li>
+                    <li class="sidebar-menu-item">
+                        <a href="#" class="sidebar-menu-link">
+                            <i class="fas fa-clipboard-list"></i>
+                            Програми
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="#" class="sidebar-menu-link">
+                            <i class="fas fa-chart-line"></i>
+                            Прогрес
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="#" class="sidebar-menu-link">
+                            <i class="fas fa-comments"></i>
+                            Повідомлення
+                        </a>
+                    </li>
+                    <div class="sidebar-menu-divider"></div>
+                    <li class="sidebar-menu-item">
+                        <a href="#" class="sidebar-menu-link">
+                            <i class="fas fa-cog"></i>
+                            Налаштування
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="index.html" class="sidebar-menu-link">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Вийти
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Основний контент -->
+            <div class="main-content">
+                <div>
+                    <h1 class="page-title">Кабінет тренера</h1>
+                    
+                    <!-- Статистика -->
+                    <div class="dashboard-stats">
+                        <div class="stat-card">
+                            <div class="stat-card-title">Клієнтів</div>
+                            <div class="stat-card-value">18</div>
+                            <div class="stat-card-info">+3 за останній місяць</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card-title">Тренувань проведено</div>
+                            <div class="stat-card-value">42</div>
+                            <div class="stat-card-info">Цього місяця</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card-title">Заплановано тренувань</div>
+                            <div class="stat-card-value">15</div>
+                            <div class="stat-card-info">На наступний тиждень</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card-title">Рейтинг</div>
+                            <div class="stat-card-value">4.8</div>
+                            <div class="stat-card-info">На основі 35 відгуків</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-content">
+                    <!-- Лівий блок -->
+                    <div>
+                        <!-- Розклад тренувань -->
+                        <div class="content-card">
+                            <div class="content-card-header">
+                                <h2 class="content-card-title">Найближчі тренування</h2>
+                                <a href="#" class="content-card-action">Повний розклад</a>
+                            </div>
+                            <div class="schedule">
+                                <div class="session">
+                                    <div class="session-time">
+                                        <div class="time-value">10:00</div>
+                                        <div class="time-day">Сьогодні</div>
+                                    </div>
+                                    <div class="session-details">
+                                        <div class="session-title">Силове тренування</div>
+                                        <div class="session-client">Клієнт: Олександр Петренко</div>
+                                        <span class="tag personal">Персональне</span>
+                                    </div>
+                                    <div class="session-action">
+                                        <a href="#" class="client-action">
+                                            Деталі <i class="fas fa-chevron-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="session">
+                                    <div class="session-time">
+                                        <div class="time-value">14:30</div>
+                                        <div class="time-day">Сьогодні</div>
+                                    </div>
+                                    <div class="session-details">
+                                        <div class="session-title">Функціональне тренування</div>
+                                        <div class="session-client">Група: 6 учасників</div>
+                                        <span class="tag group">Групове</span>
+                                    </div>
+                                    <div class="session-action">
+                                        <a href="#" class="client-action">
+                                            Деталі <i class="fas fa-chevron-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="session">
+                                    <div class="session-time">
+                                        <div class="time-value">18:00</div>
+                                        <div class="time-day">Завтра</div>
+                                    </div>
+                                    <div class="session-details">
+                                        <div class="session-title">Кардіо-силове тренування</div>
+                                        <div class="session-client">Клієнт: Марія Коваленко</div>
+                                        <span class="tag online">Онлайн</span>
+                                    </div>
+                                    <div class="session-action">
+                                        <a href="#" class="client-action">
+                                            Деталі <i class="fas fa-chevron-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                  <!-- Управління записами на тренування -->
+                  <div class="content-card">
+                    <div class="content-card-header">
+                        <h2 class="content-card-title">Управління записами</h2>
+                        <a href="#" class="content-card-action">Додати запис</a>
+                    </div>
+                    <div class="session-registrations">
+                        <div class="registration-item">
+                            <div class="registration-header">
+                                <div class="registration-title">Функціональне тренування</div>
+                                <div class="registration-date">Сьогодні, 14:30 | <span class="tag group">Групове</span></div>
+                            </div>
+                            <div class="registration-clients">
+                                <div class="client-registration">
+                                    <div class="client-small-avatar">ОК</div>
+                                    <div class="registration-client-name">Олена Ковальчук</div>
+                                    <div class="registration-actions">
+                                        <button class="registration-action confirm">
+                                            <i class="fas fa-check"></i>
+                                        </button>
+                                        <button class="registration-action edit">
+                                            <i class="fas fa-pen"></i>
+                                        </button>
+                                        <button class="registration-action remove">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="client-registration">
+                                    <div class="client-small-avatar">ІВ</div>
+                                    <div class="registration-client-name">Іван Василенко</div>
+                                    <div class="registration-actions">
+                                        <button class="registration-action confirm">
+                                            <i class="fas fa-check"></i>
+                                        </button>
+                                        <button class="registration-action edit">
+                                            <i class="fas fa-pen"></i>
+                                        </button>
+                                        <button class="registration-action remove">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="registration-footer">
+                                <button class="add-client-btn">
+                                    <i class="fas fa-plus"></i> Додати клієнта
+                                </button>
+                                <span class="clients-count">2/6 учасників</span>
+                            </div>
+                        </div>
+
+                        <div class="registration-item">
+                            <div class="registration-header">
+                                <div class="registration-title">Силове тренування</div>
+                                <div class="registration-date">Завтра, 11:00 | <span class="tag personal">Персональне</span></div>
+                            </div>
+                            <div class="registration-clients">
+                                <div class="client-registration">
+                                    <div class="client-small-avatar">ОП</div>
+                                    <div class="registration-client-name">Олександр Петренко</div>
+                                    <div class="registration-actions">
+                                        <button class="registration-action confirm active">
+                                            <i class="fas fa-check"></i>
+                                        </button>
+                                        <button class="registration-action edit">
+                                            <i class="fas fa-pen"></i>
+                                        </button>
+                                        <button class="registration-action remove">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="registration-footer">
+                                <button class="add-client-btn">
+                                    <i class="fas fa-plus"></i> Додати клієнта
+                                </button>
+                                <span class="clients-count">1/1 учасників</span>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+
+                  <!-- Список клієнтів -->
+                        <div class="content-card">
+                            <div class="content-card-header">
+                                <h2 class="content-card-title">Активні клієнти</h2>
+                                <a href="#" class="content-card-action">Переглянути всіх</a>
+                            </div>
+                            <div class="clients-list">
+                              <div class="client-item">
+                                <div class="client-avatar">ОП</div>
+                                <div class="client-info">
+                                    <div class="client-name">Олександр Петренко</div>
+                                    <div class="client-meta">
+                                        <span>Програма: Нарощування м'язової маси</span>
+                                        <span>Тренувань: 12</span>
+                                    </div>
+                                </div>
+                                <a href="#" class="client-action">
+                                    Профіль <i class="fas fa-chevron-right"></i>
+                                </a>
+                            </div>
+                            <div class="client-item">
+                                <div class="client-avatar">МК</div>
+                                <div class="client-info">
+                                    <div class="client-name">Марія Коваленко</div>
+                                    <div class="client-meta">
+                                        <span>Програма: Схуднення</span>
+                                        <span>Тренувань: 8</span>
+                                    </div>
+                                </div>
+                                <a href="#" class="client-action">
+                                    Профіль <i class="fas fa-chevron-right"></i>
+                                </a>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <!-- Правий блок -->
+                  <div>
+                      <!-- Прогрес клієнтів -->
+                      <div class="content-card">
+                          <div class="content-card-header">
+                              <h2 class="content-card-title">Прогрес клієнтів</h2>
+                              <a href="#" class="content-card-action">Детальний аналіз</a>
+                          </div>
+                          <div class="progress-list">
+                              <div class="progress-item">
+                                  <div class="progress-client">
+                                      <div class="client-small-avatar">ОП</div>
+                                      <div class="progress-client-name">Олександр П.</div>
+                                  </div>
+                                  <div class="progress-stats">
+                                      <div class="progress-stat">
+                                          <div class="progress-value">-5.2 кг</div>
+                                          <div class="progress-label">Вага</div>
+                                      </div>
+                                      <div class="progress-stat">
+                                          <div class="progress-value">+15%</div>
+                                          <div class="progress-label">Сила</div>
+                                      </div>
+                                      <div class="progress-stat">
+                                          <div class="progress-value">-3.5%</div>
+                                          <div class="progress-label">Жир</div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="progress-item">
+                                  <div class="progress-client">
+                                      <div class="client-small-avatar">МК</div>
+                                      <div class="progress-client-name">Марія К.</div>
+                                  </div>
+                                  <div class="progress-stats">
+                                      <div class="progress-stat">
+                                          <div class="progress-value">-3.8 кг</div>
+                                          <div class="progress-label">Вага</div>
+                                      </div>
+                                      <div class="progress-stat">
+                                          <div class="progress-value">+10%</div>
+                                          <div class="progress-label">Витривалість</div>
+                                      </div>
+                                      <div class="progress-stat">
+                                          <div class="progress-value">-4.2%</div>
+                                          <div class="progress-label">Жир</div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="progress-item">
+                                  <div class="progress-client">
+                                      <div class="client-small-avatar">ІВ</div>
+                                      <div class="progress-client-name">Іван В.</div>
+                                  </div>
+                                  <div class="progress-stats">
+                                      <div class="progress-stat">
+                                          <div class="progress-value">+2.5 кг</div>
+                                          <div class="progress-label">Вага</div>
+                                      </div>
+                                      <div class="progress-stat">
+                                          <div class="progress-value">+20%</div>
+                                          <div class="progress-label">Сила</div>
+                                      </div>
+                                      <div class="progress-stat">
+                                          <div class="progress-value">-1.8%</div>
+                                          <div class="progress-label">Жир</div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <a href="#" class="create-plan-button">Аналізувати прогрес</a>
+                      </div>
+
+                      <!-- Повідомлення -->
+                      <div class="content-card">
+                          <div class="content-card-header">
+                              <h2 class="content-card-title">Останні повідомлення</h2>
+                              <a href="#" class="content-card-action">Всі повідомлення</a>
+                          </div>
+                          <div class="messages-list">
+                              <div class="message-item">
+                                  <div class="client-small-avatar">ОП</div>
+                                  <div class="message-content">
+                                      <div class="message-sender">Олександр Петренко</div>
+                                      <div class="message-text">Добрий день! Чи можемо ми перенести тренування на годину пізніше?</div>
+                                      <div class="message-time">10:25</div>
+                                  </div>
+                              </div>
+                              <div class="message-item">
+                                  <div class="client-small-avatar">МК</div>
+                                  <div class="message-content">
+                                      <div class="message-sender">Марія Коваленко</div>
+                                      <div class="message-text">Дякую за останнє тренування! Відчуваю, що результати вже є!</div>
+                                      <div class="message-time">Вчора</div>
+                                  </div>
+                              </div>
+                              <div class="message-item">
+                                  <div class="client-small-avatar">ОК</div>
+                                  <div class="message-content">
+                                      <div class="message-sender">Олена Ковальчук</div>
+                                      <div class="message-text">Надіслала вам свій харчовий щоденник за тиждень. Чекаю на відгук!</div>
+                                      <div class="message-time">2 дні тому</div>
+                                  </div>
+                              </div>
+                          </div>
+                          <a href="#" class="create-plan-button">Відкрити чат</a>
+                      </div>
+
+                      <!-- Швидкі дії -->
+                      <div class="content-card">
+                          <div class="content-card-header">
+                              <h2 class="content-card-title">Швидкі дії</h2>
+                          </div>
+                          <div class="quick-actions">
+                              <a href="#" class="action-button">
+                                  <i class="fas fa-plus-circle"></i>
+                                  <span class="action-button-text">Новий клієнт</span>
+                              </a>
+                              <a href="#" class="action-button">
+                                  <i class="fas fa-clipboard"></i>
+                                  <span class="action-button-text">Створити програму</span>
+                              </a>
+                              <a href="#" class="action-button">
+                                  <i class="fas fa-calendar-plus"></i>
+                                  <span class="action-button-text">Додати тренування</span>
+                              </a>
+                              <a href="#" class="action-button">
+                                  <i class="fas fa-file-export"></i>
+                                  <span class="action-button-text">Експорт звіту</span>
+                              </a>
+                          </div>
+                      </div>
+
+                      <!-- Список клієнтів -->
+                      <div class="content-card">
+                        <div class="content-card-header">
+                            <h3 class="content-card-title">Нові клієнти</h3>
+                            <a href="#" class="content-card-action">Додати клієнта</a>
+                        </div>
+                        <div class="clients-list">
+                          <div class="client-item">
+                            <div class="client-avatar">ІВ</div>
+                            <div class="client-info">
+                                <div class="client-name">Іван Василенко</div>
+                                <div class="client-meta">
+                                    <span>Програма: Загальна фізична підготовка</span>
+                                    <span>Тренувань: 5</span>
+                                </div>
+                            </div>
+                            <a href="#" class="client-action">
+                                Профіль <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </div>
+                        <div class="client-item">
+                            <div class="client-avatar">ОК</div>
+                            <div class="client-info">
+                                <div class="client-name">Олена Ковальчук</div>
+                                <div class="client-meta">
+                                    <span>Програма: Гнучкість та рухливість</span>
+                                    <span>Тренувань: 7</span>
+                                </div>
+                            </div>
+                            <a href="#" class="client-action">
+                                Профіль <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </div>
+                        <div class="client-item">
+                          <div class="client-avatar">ІВ</div>
+                          <div class="client-info">
+                              <div class="client-name">Іван Василенко</div>
+                              <div class="client-meta">
+                                  <span>Програма: Загальна фізична підготовка</span>
+                                  <span>Тренувань: 5</span>
+                              </div>
+                          </div>
+                          <a href="#" class="client-action">
+                              Профіль <i class="fas fa-chevron-right"></i>
+                          </a>
+                      </div>
+                      <div class="client-item">
+                          <div class="client-avatar">ОК</div>
+                          <div class="client-info">
+                              <div class="client-name">Олена Ковальчук</div>
+                              <div class="client-meta">
+                                  <span>Програма: Гнучкість та рухливість</span>
+                                  <span>Тренувань: 7</span>
+                              </div>
+                          </div>
+                          <a href="#" class="client-action">
+                              Профіль <i class="fas fa-chevron-right"></i>
+                          </a>
+                      </div>
+                        </div>
+                    </div>
+                </div>
+
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <script src="trainer-script.js"></script>
+</body>
+</html>
